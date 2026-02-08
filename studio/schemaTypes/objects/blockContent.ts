@@ -40,7 +40,7 @@ export const blockContent = defineType({
           }),
         ],
       },
-    }),
+    } as Parameters<typeof defineArrayMember>[0]),
     defineArrayMember({ type: 'figure' }),
     defineArrayMember({ type: 'videoEmbed' }),
   ],
