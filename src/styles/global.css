@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-background: var(--site-bg);
+  --color-foreground: var(--site-fg);
+  --color-surface: var(--site-surface);
+  --color-border: var(--site-border);
+  --color-muted: var(--site-muted);
+  --color-accent: var(--site-accent);
+  --color-accent-hover: var(--site-accent-hover);
+  --color-highlight: var(--site-highlight);
+}
+
+html {
+  background: var(--site-bg);
+  color: var(--site-fg);
+}

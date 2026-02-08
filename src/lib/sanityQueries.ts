@@ -30,6 +30,7 @@ export const projectBySlugQuery = defineQuery(`*[_type == "project" && slug.curr
 
 export const siteSettingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
   title,
+  themePreset,
   "homeSlug": homePage->slug.current,
   navigation[]{
     label,

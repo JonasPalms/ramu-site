@@ -6,11 +6,10 @@ import { pageBySlugQuery, siteSettingsQuery } from '../lib/sanityQueries'
 
 const settings = sanity ? await sanity.fetch(siteSettingsQuery) : null
 const homeSlug = settings?.homeSlug || 'home'
-console.log(settings)
 const home = sanity ? await sanity.fetch(pageBySlugQuery, { slug: homeSlug }) : null
 ---
 
 <BaseLayout title={home?.title || settings?.title || 'Bob'}>
-  <h1>{home?.title}</h1>
+  <h1 class="text-4xl font-bold mb-4">{home?.title}</h1>
   <RichText value={home?.content} />
 </BaseLayout>
