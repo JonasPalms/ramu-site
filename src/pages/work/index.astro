@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../@/layouts/BaseLayout.astro'
-import Button from '../@/components/ui/Button.astro'
-import Card from '../@/components/ui/Card.astro'
-import { sanity } from '../../lib/sanity'
-import { projectsIndexQuery } from '../../lib/sanityQueries'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/ui/Button.astro'
+import Card from '@/components/ui/Card.astro'
+import { sanity } from '@/lib/sanity'
+import { projectsIndexQuery } from '@/lib/sanityQueries'
 
 const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
 ---

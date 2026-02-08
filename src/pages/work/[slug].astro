@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../@/layouts/BaseLayout.astro'
-import RichText from '../@/components/RichText.astro'
-import Button from '../@/components/ui/Button.astro'
-import Card from '../@/components/ui/Card.astro'
-import { sanity } from '../../lib/sanity'
-import { allProjectSlugsQuery, projectBySlugQuery } from '../../lib/sanityQueries'
-import { urlForImage } from '../../lib/sanityImage'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import RichText from '@/components/RichText.astro'
+import Button from '@/components/ui/Button.astro'
+import Card from '@/components/ui/Card.astro'
+import { sanity } from '@/lib/sanity'
+import { allProjectSlugsQuery, projectBySlugQuery } from '@/lib/sanityQueries'
+import { urlForImage } from '@/lib/sanityImage'
 
 export async function getStaticPaths() {
   if (!sanity) return []
