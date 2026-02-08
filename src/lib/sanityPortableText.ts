@@ -1,5 +1,5 @@
-import {toHTML} from '@portabletext/to-html'
-import {urlForImage} from './sanityImage'
+import { toHTML } from '@portabletext/to-html'
+import { urlForImage } from './sanityImage'
 
 export function portableTextToHtml(value: unknown): string {
   if (!value) return ''
@@ -7,7 +7,7 @@ export function portableTextToHtml(value: unknown): string {
   return toHTML(value as any, {
     components: {
       types: {
-        figure: ({value}: any) => {
+        figure: ({ value }: any) => {
           const img = value?.image
           const alt = value?.alt || ''
           const caption = value?.caption
@@ -15,17 +15,19 @@ export function portableTextToHtml(value: unknown): string {
           const url = urlForImage(img)?.width(1600).fit('max').auto('format').url()
           if (!url) return ''
 
-          const figcaption = caption ? `<figcaption>${escapeHtml(String(caption))}</figcaption>` : ''
+          const figcaption = caption
+            ? `<figcaption>${escapeHtml(String(caption))}</figcaption>`
+            : ''
           return `<figure><img src="${escapeAttr(url)}" alt="${escapeAttr(alt)}" loading="lazy" />${figcaption}</figure>`
         },
-        videoEmbed: ({value}: any) => {
+        videoEmbed: ({ value }: any) => {
           const url = value?.url
           if (!url) return ''
           return `<p><a href="${escapeAttr(String(url))}" rel="noopener noreferrer">${escapeHtml(String(value?.title || url))}</a></p>`
         },
       },
       marks: {
-        link: ({value, children}: any) => {
+        link: ({ value, children }: any) => {
           const href = value?.href
           if (!href) return children
           const blank = value?.blank !== false
@@ -49,4 +51,3 @@ function escapeHtml(input: string): string {
 function escapeAttr(input: string): string {
   return escapeHtml(input)
 }
-

@@ -1,9 +1,8 @@
 ---
-import {portableTextToHtml} from '../lib/sanityPortableText'
+import { portableTextToHtml } from '../lib/sanityPortableText'
 
-const {value} = Astro.props as {value: unknown}
+const { value } = Astro.props as { value: unknown }
 const html = portableTextToHtml(value)
 ---
 
 <div class="prose" set:html={html} />
-

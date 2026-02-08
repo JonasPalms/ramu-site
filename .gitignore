@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# sanity typegen/schema artifacts
+studio/schema.json
+
 # macOS-specific files
 .DS_Store
 

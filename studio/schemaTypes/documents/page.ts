@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const page = defineType({
   name: 'page',
@@ -15,7 +15,7 @@ export const page = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: {source: 'title', maxLength: 96},
+      options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -23,8 +23,8 @@ export const page = defineType({
       title: 'SEO',
       type: 'object',
       fields: [
-        defineField({name: 'metaTitle', title: 'Meta title', type: 'string'}),
-        defineField({name: 'metaDescription', title: 'Meta description', type: 'text', rows: 3}),
+        defineField({ name: 'metaTitle', title: 'Meta title', type: 'string' }),
+        defineField({ name: 'metaDescription', title: 'Meta description', type: 'text', rows: 3 }),
       ],
     }),
     defineField({
@@ -34,7 +34,6 @@ export const page = defineType({
     }),
   ],
   preview: {
-    select: {title: 'title', subtitle: 'slug.current'},
+    select: { title: 'title', subtitle: 'slug.current' },
   },
 })
-

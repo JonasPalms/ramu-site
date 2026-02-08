@@ -1,36 +1,40 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import RichText from '../../components/RichText.astro'
-import {sanity} from '../../lib/sanity'
-import {allProjectSlugsQuery, projectBySlugQuery} from '../../lib/sanityQueries'
-import {urlForImage} from '../../lib/sanityImage'
+import { sanity } from '../../lib/sanity'
+import { allProjectSlugsQuery, projectBySlugQuery } from '../../lib/sanityQueries'
+import { urlForImage } from '../../lib/sanityImage'
 
 export async function getStaticPaths() {
   if (!sanity) return []
-  const projects = await sanity.fetch<{slug: string}[]>(allProjectSlugsQuery)
-  return projects.map((p) => ({params: {slug: p.slug}}))
+  const projects = await sanity.fetch<{ slug: string }[]>(allProjectSlugsQuery)
+  return projects.map((p) => ({ params: { slug: p.slug } }))
 }
 
-const {slug} = Astro.params
-const project = sanity ? await sanity.fetch<any>(projectBySlugQuery, {slug}) : null
+const { slug } = Astro.params
+const project = sanity ? await sanity.fetch<any>(projectBySlugQuery, { slug }) : null
 
 const heroUrl =
-  project?.hero?.image && urlForImage(project.hero.image)?.width(2000).fit('max').auto('format').url()
+  project?.hero?.image &&
+  urlForImage(project.hero.image)?.width(2000).fit('max').auto('format').url()
 ---
 
 <BaseLayout title={project?.title || slug}>
-  {project ? (
-    <>
-      <h1>{project.title}</h1>
-      {project.year ? <p>{project.year}</p> : null}
-      {heroUrl ? <img src={heroUrl} alt={project.hero?.alt || ''} loading="lazy" /> : null}
-      {project.body ? <RichText value={project.body} /> : null}
-    </>
-  ) : (
-    <>
-      <h1>Missing content</h1>
-      <p>Configure Sanity env vars and publish a project with slug: <code>{slug}</code>.</p>
-    </>
-  )}
+  {
+    project ? (
+      <>
+        <h1>{project.title}</h1>
+        {project.year ? <p>{project.year}</p> : null}
+        {heroUrl ? <img src={heroUrl} alt={project.hero?.alt || ''} loading="lazy" /> : null}
+        {project.body ? <RichText value={project.body} /> : null}
+      </>
+    ) : (
+      <>
+        <h1>Missing content</h1>
+        <p>
+          Configure Sanity env vars and publish a project with slug: <code>{slug}</code>.
+        </p>
+      </>
+    )
+  }
 </BaseLayout>
-

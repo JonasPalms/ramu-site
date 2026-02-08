@@ -1,4 +1,4 @@
-import type {StructureResolver} from 'sanity/structure'
+import type { StructureResolver } from 'sanity/structure'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -12,4 +12,3 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('page').title('Pages'),
       S.documentTypeListItem('project').title('Projects'),
     ])
-

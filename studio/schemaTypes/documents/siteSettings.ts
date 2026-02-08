@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const siteSettings = defineType({
   name: 'siteSettings',
@@ -6,12 +6,12 @@ export const siteSettings = defineType({
   type: 'document',
   __experimental_actions: ['update', 'publish'],
   fields: [
-    defineField({name: 'title', title: 'Site title', type: 'string'}),
+    defineField({ name: 'title', title: 'Site title', type: 'string' }),
     defineField({
       name: 'homePage',
       title: 'Home page',
       type: 'reference',
-      to: [{type: 'page'}],
+      to: [{ type: 'page' }],
     }),
     defineField({
       name: 'navigation',
@@ -23,12 +23,17 @@ export const siteSettings = defineType({
           title: 'Nav item',
           type: 'object',
           fields: [
-            defineField({name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required()}),
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
             defineField({
               name: 'page',
               title: 'Page',
               type: 'reference',
-              to: [{type: 'page'}],
+              to: [{ type: 'page' }],
             }),
             defineField({
               name: 'externalUrl',
@@ -37,7 +42,7 @@ export const siteSettings = defineType({
             }),
           ],
           preview: {
-            select: {title: 'label', subtitle: 'externalUrl'},
+            select: { title: 'label', subtitle: 'externalUrl' },
           },
         }),
       ],
@@ -52,11 +57,21 @@ export const siteSettings = defineType({
           title: 'Social link',
           type: 'object',
           fields: [
-            defineField({name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required()}),
-            defineField({name: 'url', title: 'URL', type: 'url', validation: (Rule) => Rule.required()}),
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'url',
+              title: 'URL',
+              type: 'url',
+              validation: (Rule) => Rule.required(),
+            }),
           ],
           preview: {
-            select: {title: 'label', subtitle: 'url'},
+            select: { title: 'label', subtitle: 'url' },
           },
         }),
       ],

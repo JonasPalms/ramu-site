@@ -1,4 +1,4 @@
-import {createClient} from '@sanity/client'
+import { createClient } from '@sanity/client'
 
 export type SanityConfig = {
   projectId: string
@@ -14,7 +14,7 @@ export function getSanityConfig(): SanityConfig | null {
   const useCdn = (import.meta.env.SANITY_USE_CDN ?? 'true') === 'true'
 
   if (!projectId || !dataset || !apiVersion) return null
-  return {projectId, dataset, apiVersion, useCdn}
+  return { projectId, dataset, apiVersion, useCdn }
 }
 
 const sanityConfig = getSanityConfig()
@@ -26,4 +26,3 @@ export const sanity =
     perspective: 'published',
     stega: false,
   })
-

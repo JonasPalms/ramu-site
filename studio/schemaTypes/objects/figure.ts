@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const figure = defineType({
   name: 'figure',
@@ -9,14 +9,13 @@ export const figure = defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({name: 'alt', title: 'Alt text', type: 'string'}),
-    defineField({name: 'caption', title: 'Caption', type: 'string'}),
+    defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+    defineField({ name: 'caption', title: 'Caption', type: 'string' }),
   ],
   preview: {
-    select: {media: 'image', title: 'alt', subtitle: 'caption'},
+    select: { media: 'image', title: 'alt', subtitle: 'caption' },
   },
 })
-

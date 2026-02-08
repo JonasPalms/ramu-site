@@ -4,13 +4,13 @@ Static Astro site that fetches published content from Sanity. The Sanity Studio 
 
 ## Setup
 
-1) Install root deps:
+1. Install root deps:
 
 ```sh
 npm install
 ```
 
-2) Add env vars:
+2. Add env vars:
 
 ```sh
 cp .env.example .env
@@ -18,10 +18,11 @@ cp .env.example .env
 
 Fill in `SANITY_PROJECT_ID` / `SANITY_DATASET` / `SANITY_API_VERSION`.
 Recommended:
+
 - Local Studio uses `development`
 - Vercel builds use `production`
 
-3) Run Astro:
+3. Run Astro:
 
 ```sh
 npm run dev
