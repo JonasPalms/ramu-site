@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import {sanity} from '../../lib/sanity'
+import {projectsIndexQuery} from '../../lib/sanityQueries'
+
+const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
+---
+
+<BaseLayout title="Work">
+  <h1>Work</h1>
+  {projects.length ? (
+    <ul>
+      {projects.map((p) => (
+        <li>
+          <a href={`/work/${p.slug}`}>{p.title}</a>
+          {p.year ? ` (${p.year})` : ''}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No projects yet.</p>
+  )}
+</BaseLayout>
+

@@ -1,17 +1,28 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import RichText from '../components/RichText.astro'
+import {sanity} from '../lib/sanity'
+import {pageBySlugQuery, siteSettingsQuery} from '../lib/sanityQueries'
 
+const settings = sanity ? await sanity.fetch<any>(siteSettingsQuery) : null
+const homeSlug = settings?.homeSlug || 'home'
+console.log(settings)
+const home = sanity ? await sanity.fetch<any>(pageBySlugQuery, {slug: homeSlug}) : null
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={home?.title || settings?.title || 'Bob'}>
+  {home ? (
+    <>
+      <h1>{home.title}</h1>
+      <RichText value={home.content} />
+    </>
+  ) : (
+    <>
+      <h1>Ramu</h1>
+      <p>Add Sanity env vars and publish a page with slug: <code>home</code>.</p>
+      <p>
+        Then deploy static pages (Sanity publish → Vercel deploy hook → rebuild).
+      </p>
+    </>
+  )}
+</BaseLayout>

@@ -1,43 +1,44 @@
-# Astro Starter Kit: Minimal
+# Astro + Sanity (Headless, Static)
+
+Static Astro site that fetches published content from Sanity. The Sanity Studio (schemas + editor UI) lives in `studio/` and can be hosted separately.
+
+## Setup
+
+1) Install root deps:
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+2) Add env vars:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+cp .env.example .env
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Fill in `SANITY_PROJECT_ID` / `SANITY_DATASET` / `SANITY_API_VERSION`.
+Recommended:
+- Local Studio uses `development`
+- Vercel builds use `production`
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+3) Run Astro:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```sh
+npm run dev
+```
 
-## 🧞 Commands
+## Deploy (Vercel)
 
-All commands are run from the root of the project, from a terminal:
+- Set the same `SANITY_*` env vars in Vercel.
+- Create a Vercel “Deploy Hook”, then add it as a webhook in Sanity (trigger on publish) so the static site rebuilds on content changes.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Content model
 
-## 👀 Want to learn more?
+- `page` → `src/pages/[slug].astro` (slug `home` is used for `/`)
+- `project` → `src/pages/work/[slug].astro` and listing at `/work`
+- `siteSettings` → optional singleton for nav + which page is “home”
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Sanity Studio
+
+- Schemas/models are in code under `studio/schemaTypes/`.
+- See `studio/README.md` for Studio setup and deploy notes.
