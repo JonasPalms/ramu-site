@@ -1,10 +1,11 @@
-import {defineCliConfig, getStudioEnvironmentVariables} from 'sanity/cli'
+import { defineCliConfig, getStudioEnvironmentVariables } from 'sanity/cli'
 import path from 'node:path'
-import {fileURLToPath} from 'node:url'
+import { fileURLToPath } from 'node:url'
 
 const envDir = path.dirname(fileURLToPath(import.meta.url))
 const mode =
-  process.env.SANITY_ACTIVE_ENV || (process.env.NODE_ENV === 'production' ? 'production' : 'development')
+  process.env.SANITY_ACTIVE_ENV ||
+  (process.env.NODE_ENV === 'production' ? 'production' : 'development')
 
 const env = getStudioEnvironmentVariables({
   envFile: {

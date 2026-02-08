@@ -1,0 +1,48 @@
+---
+import { cn } from '@/utils/cn'
+import { slugify } from '../../utils/slugify'
+
+const INPUT_TYPES = ['text', 'email', 'password', 'search', 'tel', 'url', 'number'] as const
+type InputType = (typeof INPUT_TYPES)[number]
+
+type Props = {
+  label: string
+  name?: string
+  id?: string
+  type?: InputType
+  placeholder?: string
+  autocomplete?: string
+  required?: boolean
+  class?: string
+  inputClass?: string
+}
+
+const {
+  label,
+  name,
+  id,
+  type = 'text',
+  placeholder,
+  autocomplete,
+  required,
+  class: className,
+  inputClass,
+} = Astro.props as Props
+
+const fieldId = id ?? name ?? slugify(label)
+const baseInput =
+  'h-11 w-full rounded-xl border border-border bg-background px-4 text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent'
+---
+
+<label class={cn('grid gap-1', className)} for={fieldId}>
+  <span class="text-sm font-medium">{label}</span>
+  <input
+    id={fieldId}
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    autocomplete={autocomplete}
+    required={required}
+    class={cn(baseInput, inputClass)}
+  />
+</label>

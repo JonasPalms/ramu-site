@@ -40,4 +40,3 @@ export function getThemePreset(key: unknown): ThemeVars {
   }
   return themePresets.sandGreen
 }
-

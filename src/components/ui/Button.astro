@@ -1,0 +1,56 @@
+---
+import { cn } from '@/utils/cn'
+
+type Variant = 'primary' | 'secondary' | 'link'
+type Size = 'sm' | 'md'
+
+type Props = {
+  href?: string
+  target?: string
+  rel?: string
+  type?: 'button' | 'submit' | 'reset'
+  variant?: Variant
+  size?: Size
+  class?: string
+}
+
+const {
+  href,
+  target,
+  rel,
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  class: className,
+} = Astro.props as Props
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-accent'
+
+const sizeClass = size === 'sm' ? 'px-4 py-1.5 text-sm' : 'px-5 py-2 text-sm'
+
+const variantClass =
+  variant === 'primary'
+    ? 'bg-accent text-background hover:bg-accent-hover'
+    : variant === 'secondary'
+      ? 'border border-border bg-surface text-foreground hover:bg-background'
+      : 'text-accent underline underline-offset-4 hover:text-accent-hover focus:ring-0'
+
+const classes = cn(base, sizeClass, variantClass, className)
+
+const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'))
+const resolvedRel = rel ?? (isExternal ? 'noopener noreferrer' : undefined)
+const resolvedTarget = target ?? (isExternal ? '_blank' : undefined)
+---
+
+{
+  href ? (
+    <a class={classes} href={href} rel={resolvedRel} target={resolvedTarget}>
+      <slot />
+    </a>
+  ) : (
+    <button class={classes} type={type}>
+      <slot />
+    </button>
+  )
+}

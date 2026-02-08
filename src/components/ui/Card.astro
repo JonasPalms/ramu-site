@@ -1,0 +1,21 @@
+---
+import { cn } from '@/utils/cn'
+
+type Tone = 'surface' | 'background'
+
+type Props = {
+  as?: 'div' | 'section' | 'article'
+  tone?: Tone
+  class?: string
+}
+
+const { as = 'div', tone = 'surface', class: className } = Astro.props as Props
+const Tag = as
+
+const toneClass = tone === 'background' ? 'bg-background' : 'bg-surface'
+const classes = cn('rounded-2xl border border-border p-6', toneClass, className)
+---
+
+<Tag class={classes}>
+  <slot />
+</Tag>

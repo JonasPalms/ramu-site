@@ -1,6 +1,8 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import RichText from '../../components/RichText.astro'
+import BaseLayout from '../@/layouts/BaseLayout.astro'
+import RichText from '../@/components/RichText.astro'
+import Button from '../@/components/ui/Button.astro'
+import Card from '../@/components/ui/Card.astro'
 import { sanity } from '../../lib/sanity'
 import { allProjectSlugsQuery, projectBySlugQuery } from '../../lib/sanityQueries'
 import { urlForImage } from '../../lib/sanityImage'
@@ -23,10 +25,32 @@ const heroUrl =
   {
     project ? (
       <>
-        <h1>{project.title}</h1>
-        {project.year ? <p>{project.year}</p> : null}
-        {heroUrl ? <img src={heroUrl} alt={project.hero?.alt || ''} loading="lazy" /> : null}
-        {project.body ? <RichText value={project.body} /> : null}
+        <header class="space-y-3">
+          <div>
+            <Button href="/work" variant="link">
+              Back to work
+            </Button>
+          </div>
+          <h1 class="text-4xl tracking-tight">{project.title}</h1>
+          {project.year ? <p class="text-muted">{project.year}</p> : null}
+        </header>
+
+        {heroUrl ? (
+          <Card tone="background" class="mt-10 overflow-hidden p-0">
+            <img
+              src={heroUrl}
+              alt={project.hero?.alt || ''}
+              loading="lazy"
+              class="aspect-video w-full object-cover"
+            />
+          </Card>
+        ) : null}
+
+        {project.body ? (
+          <Card tone="surface" class="mt-6">
+            <RichText value={project.body} />
+          </Card>
+        ) : null}
       </>
     ) : (
       <>

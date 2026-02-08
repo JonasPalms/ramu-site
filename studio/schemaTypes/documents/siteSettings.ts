@@ -4,28 +4,28 @@ export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site settings',
   type: 'document',
-	  __experimental_actions: ['update', 'publish'],
-	  fields: [
-	    defineField({ name: 'title', title: 'Site title', type: 'string' }),
-	    defineField({
-	      name: 'themePreset',
-	      title: 'Theme preset',
-	      type: 'string',
-	      initialValue: 'sandGreen',
-	      options: {
-	        list: [
-	          { title: 'Sand + Green', value: 'sandGreen' },
-	          { title: 'Ink + Sand', value: 'inkSand' },
-	        ],
-	        layout: 'dropdown',
-	      },
-	      validation: (Rule) => Rule.required(),
-	    }),
-	    defineField({
-	      name: 'homePage',
-	      title: 'Home page',
-	      type: 'reference',
-	      to: [{ type: 'page' }],
+  __experimental_actions: ['update', 'publish'],
+  fields: [
+    defineField({ name: 'title', title: 'Site title', type: 'string' }),
+    defineField({
+      name: 'themePreset',
+      title: 'Theme preset',
+      type: 'string',
+      initialValue: 'sandGreen',
+      options: {
+        list: [
+          { title: 'Sand + Green', value: 'sandGreen' },
+          { title: 'Ink + Sand', value: 'inkSand' },
+        ],
+        layout: 'dropdown',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'homePage',
+      title: 'Home page',
+      type: 'reference',
+      to: [{ type: 'page' }],
     }),
     defineField({
       name: 'navigation',
