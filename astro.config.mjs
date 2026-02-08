@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
+  prefetch: true,
   vite: {
     plugins: [tailwindcss()],
     resolve: {

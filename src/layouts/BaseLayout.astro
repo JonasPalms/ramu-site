@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css'
 
+import { ClientRouter } from 'astro:transitions'
+
 import { sanity } from '../lib/sanity'
 import { siteSettingsQuery } from '../lib/sanityQueries'
 import { getThemePreset } from '../lib/themes'
@@ -26,6 +28,7 @@ const rootStyle = [
 <html lang="en" style={rootStyle}>
   <head>
     <meta charset="utf-8" />
+    <ClientRouter />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
