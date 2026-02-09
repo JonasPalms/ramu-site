@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@portabletext/to-html": "^2.0.17",
+    "@sanity/client": "^7.11.2",
+    "@sanity/image-url": "^1.1.0",
+    "astro": "^5.17.1",
+    "groq": "^3.96.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.13"
+  }
+}

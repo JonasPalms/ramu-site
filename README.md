@@ -1,45 +1,47 @@
-# Astro + Sanity (Headless, Static)
+# Ramu Site
 
-Static Astro site that fetches published content from Sanity. The Sanity Studio (schemas + editor UI) lives in `studio/` and can be hosted separately.
+Static Astro site that fetches published content from Sanity. Two workspaces:
+
+- **frontend/** — Astro app (pages, components, Sanity client)
+- **studio/** — Sanity Studio (schemas + editor UI), can be hosted separately
+
+Global config (Prettier, README) lives in the repo root.
 
 ## Setup
 
-1. Install root deps:
+1. Install dependencies (root installs all workspaces):
 
 ```sh
 npm install
 ```
 
-2. Add env vars:
+2. Add env vars. For the frontend, create `frontend/.env` (or root `.env` if you prefer) with `SANITY_PROJECT_ID`, `SANITY_DATASET`, `SANITY_API_VERSION`. For Studio, see `studio/README.md` and `studio/.env`.
 
-```sh
-cp .env.example .env
-```
-
-Fill in `SANITY_PROJECT_ID` / `SANITY_DATASET` / `SANITY_API_VERSION`.
-Recommended:
-
-- Local Studio uses `development`
-- Vercel builds use `production`
-
-3. Run Astro:
+3. Run the Astro dev server:
 
 ```sh
 npm run dev
 ```
 
+4. Run Sanity Studio (optional):
+
+```sh
+npm run studio
+```
+
 ## Deploy (Vercel)
 
-- Set the same `SANITY_*` env vars in Vercel.
-- Create a Vercel “Deploy Hook”, then add it as a webhook in Sanity (trigger on publish) so the static site rebuilds on content changes.
+- Build from root: set Vercel build command to `npm run build` (runs `build` in `frontend`).
+- Set `SANITY_*` env vars in Vercel.
+- Add a Sanity webhook (Deploy Hook) so the site rebuilds on publish.
 
 ## Content model
 
-- `page` → `src/pages/[slug].astro` (slug `home` is used for `/`)
-- `project` → `src/pages/work/[slug].astro` and listing at `/work`
-- `siteSettings` → optional singleton for nav + which page is “home”
+- `page` → `frontend/src/pages/[slug].astro` (slug `home` → `/`)
+- `project` → `frontend/src/pages/work/[slug].astro` and listing at `/work`
+- `siteSettings` → optional singleton for nav + home page
 
 ## Sanity Studio
 
-- Schemas/models are in code under `studio/schemaTypes/`.
-- See `studio/README.md` for Studio setup and deploy notes.
+- Schemas: `studio/schemaTypes/`
+- See `studio/README.md` for Studio setup and deploy.

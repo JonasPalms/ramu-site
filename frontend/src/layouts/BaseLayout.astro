@@ -5,27 +5,18 @@ import { ClientRouter } from 'astro:transitions'
 
 import { sanity } from '../lib/sanity'
 import { siteSettingsQuery } from '../lib/sanityQueries'
-import { getThemePreset } from '../lib/themes'
 
 const settings = sanity ? await sanity.fetch<any>(siteSettingsQuery) : null
-const themePreset = getThemePreset(settings?.themePreset)
+const themePreset =
+  typeof settings?.themePreset === 'string' && ['sandGreen', 'inkSand'].includes(settings.themePreset)
+    ? settings.themePreset
+    : 'sandGreen'
 
 const { title } = Astro.props as { title?: string }
-
-const rootStyle = [
-  `--site-bg:${themePreset.bg}`,
-  `--site-fg:${themePreset.fg}`,
-  `--site-surface:${themePreset.surface}`,
-  `--site-border:${themePreset.border}`,
-  `--site-muted:${themePreset.muted}`,
-  `--site-accent:${themePreset.accent}`,
-  `--site-accent-hover:${themePreset.accentHover}`,
-  `--site-highlight:${themePreset.highlight}`,
-].join(';')
 ---
 
 <!doctype html>
-<html lang="en" style={rootStyle}>
+<html lang="en" data-theme={themePreset}>
   <head>
     <meta charset="utf-8" />
     <ClientRouter />
@@ -39,8 +30,8 @@ const rootStyle = [
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ? `${title} · ` : ''}</title></head
-  >
+    <title>{title ? `${title} · ` : ''}Ramu</title>
+  </head>
   <body class="min-h-screen bg-background text-foreground">
     <main class="mx-auto max-w-4xl px-6 py-10">
       <slot />

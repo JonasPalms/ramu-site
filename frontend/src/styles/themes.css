@@ -1,0 +1,22 @@
+:root {
+  --site-bg: #f4ebdd;
+  --site-fg: #1f3a2e;
+  --site-surface: #fff8ee;
+  --site-border: #e3d6c3;
+  --site-muted: #4e6b5b;
+  --site-accent: #2f6b4f;
+  --site-accent-hover: #255740;
+  --site-highlight: #c97c4a;
+}
+
+html[data-theme='inkSand'] {
+  --site-bg: #f3eee4;
+  --site-fg: #1a1e22;
+  --site-surface: #ffffff;
+  --site-border: #ded6c9;
+  --site-muted: #4b5563;
+  --site-accent: #0f4c5c;
+  --site-accent-hover: #0b3a46;
+  --site-highlight: #9a6b2f;
+}
+

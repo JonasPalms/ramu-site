@@ -1,7 +1,10 @@
 # build output
 dist/
+frontend/dist/
+
 # generated types
 .astro/
+frontend/.astro/
 
 # dependencies
 node_modules/

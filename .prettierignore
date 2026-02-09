@@ -1,6 +1,8 @@
 dist
 .astro
 node_modules
+frontend/node_modules
+frontend/.astro
 studio/node_modules
 studio/.sanity
 studio/schema.json
