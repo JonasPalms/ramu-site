@@ -12,28 +12,13 @@ const home = sanity ? await sanity.fetch(pageBySlugQuery, { slug: homeSlug }) : 
 ---
 
 <BaseLayout title={home?.title || settings?.title || 'Home'}>
-  {
-    home ? (
-      <>
-        <header class="space-y-3">
-          <h1 class="text-5xl tracking-tight">{home.title}</h1>
-        </header>
-        <Card tone="surface" class="mt-6">
-          <RichText value={home.content} />
-        </Card>
-        <div class="mt-8">
-          <Button href="/work" variant="secondary">
-            View work
-          </Button>
-        </div>
-      </>
-    ) : (
-      <Card tone="surface">
-        <h1 class="text-4xl tracking-tight">Ramu</h1>
-        <p class="mt-3 text-muted">
-          Add Sanity env vars and publish a page with slug: <code>home</code>.
-        </p>
-      </Card>
-    )
-  }
+  <header class="space-y-3">
+    <h1 class="text-5xl tracking-tight">{home?.title}</h1>
+  </header>
+  <Card tone="surface" class="mt-6">
+    <RichText value={home?.content} />
+  </Card>
+  <div class="mt-8">
+    <Button href="/work" variant="secondary"> View work </Button>
+  </div>
 </BaseLayout>
