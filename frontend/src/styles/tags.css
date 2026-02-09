@@ -14,4 +14,3 @@ a:not([class]):focus-visible {
   outline-offset: 2px;
   border-radius: 0.375rem;
 }
-

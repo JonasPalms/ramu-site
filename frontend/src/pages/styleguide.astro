@@ -4,137 +4,140 @@ import Button from '@/components/ui/Button.astro'
 import Card from '@/components/ui/Card.astro'
 import TextField from '@/components/ui/TextField.astro'
 import TextAreaField from '@/components/ui/TextAreaField.astro'
+import Container from '@/components/layout/Container.astro'
 ---
 
 <BaseLayout title="Styleguide">
-  <header class="space-y-2">
-    <h1 class="text-4xl tracking-tight">Styleguide</h1>
-    <p class="text-muted">
-      A quick reference page for typography, colors, and basic UI components.
-    </p>
-  </header>
-
-  <hr class="my-10 border-border/60" />
-
-  <section class="space-y-6">
-    <h2 class="text-2xl tracking-tight">Typography</h2>
-
-    <div class="space-y-4">
-      <p>
-        This is body text. It should feel comfortable for reading, with enough line-height and
-        contrast. Here’s a <a href="#">link</a>.
-      </p>
-
+  <Container>
+    <header class="space-y-2">
+      <h1 class="text-4xl tracking-tight">Styleguide</h1>
       <p class="text-muted">
-        This is muted text for secondary information. Use it for captions, metadata, and helper
-        copy.
+        A quick reference page for typography, colors, and basic UI components.
       </p>
+    </header>
 
-      <blockquote class="border-l-2 border-border pl-4 italic text-foreground/90">
-        “A short quote or pull quote. Good for testimonials or editorial flavor.”
-      </blockquote>
+    <hr class="my-10 border-border/60" />
 
-      <ul class="list-inside list-disc space-y-1">
-        <li>Unordered list item</li>
-        <li>
-          Another item with <strong>bold</strong> and <em>emphasis</em>
-        </li>
-        <li>Third item</li>
-      </ul>
+    <section class="space-y-6">
+      <h2 class="text-2xl tracking-tight">Typography</h2>
 
-      <ol class="list-inside list-decimal space-y-1">
-        <li>Ordered list item</li>
-        <li>Another item</li>
-        <li>Third item</li>
-      </ol>
+      <div class="space-y-4">
+        <p>
+          This is body text. It should feel comfortable for reading, with enough line-height and
+          contrast. Here’s a <a href="#">link</a>.
+        </p>
 
-      <pre
-        class="overflow-x-auto rounded-xl border border-border bg-surface p-4 text-sm">
+        <p class="text-muted">
+          This is muted text for secondary information. Use it for captions, metadata, and helper
+          copy.
+        </p>
+
+        <blockquote class="border-l-2 border-border pl-4 italic text-foreground/90">
+          “A short quote or pull quote. Good for testimonials or editorial flavor.”
+        </blockquote>
+
+        <ul class="list-inside list-disc space-y-1">
+          <li>Unordered list item</li>
+          <li>
+            Another item with <strong>bold</strong> and <em>emphasis</em>
+          </li>
+          <li>Third item</li>
+        </ul>
+
+        <ol class="list-inside list-decimal space-y-1">
+          <li>Ordered list item</li>
+          <li>Another item</li>
+          <li>Third item</li>
+        </ol>
+
+        <pre
+          class="overflow-x-auto rounded-xl border border-border bg-surface p-4 text-sm">
 <code>const hello = 'world'
 console.log(hello)</code></pre>
-    </div>
-  </section>
-
-  <hr class="my-10 border-border/60" />
-
-  <section class="space-y-6">
-    <h2 class="text-2xl tracking-tight">Colors</h2>
-
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <div class="rounded-xl border border-border bg-background p-4">
-        <p class="text-sm font-medium">Background</p>
-        <div class="mt-3 h-10 rounded-lg border border-border bg-background"></div>
       </div>
-      <div class="rounded-xl border border-border bg-background p-4">
-        <p class="text-sm font-medium">Surface</p>
-        <div class="mt-3 h-10 rounded-lg border border-border bg-surface"></div>
-      </div>
-      <div class="rounded-xl border border-border bg-background p-4">
-        <p class="text-sm font-medium">Accent</p>
-        <div class="mt-3 h-10 rounded-lg border border-border bg-accent"></div>
-      </div>
-      <div class="rounded-xl border border-border bg-background p-4">
-        <p class="text-sm font-medium">Highlight</p>
-        <div class="mt-3 h-10 rounded-lg border border-border bg-highlight"></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <hr class="my-10 border-border/60" />
+    <hr class="my-10 border-border/60" />
 
-  <section class="space-y-6">
-    <h2 class="text-2xl tracking-tight">Buttons & badges</h2>
+    <section class="space-y-6">
+      <h2 class="text-2xl tracking-tight">Colors</h2>
 
-    <div class="flex flex-wrap items-center gap-3">
-      <Button href="#" variant="primary">Primary</Button>
-      <Button href="#" variant="secondary">Secondary</Button>
-      <Button href="#" variant="link">Text link</Button>
-
-      <span
-        class="ml-2 inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-xs"
-      >
-        Badge
-      </span>
-    </div>
-  </section>
-
-  <hr class="my-10 border-border/60" />
-
-  <section class="space-y-6">
-    <h2 class="text-2xl tracking-tight">Cards</h2>
-
-    <div class="grid gap-4 sm:grid-cols-2">
-      <Card as="article" tone="surface">
-        <h3 class="text-xl tracking-tight">Project card</h3>
-        <p class="mt-2 text-muted">Short description with a little detail about the work.</p>
-        <div class="mt-4 flex items-center gap-3">
-          <Button href="#" variant="link" class="text-sm">View</Button>
-          <span class="text-xs text-muted">2026</span>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-border bg-background p-4">
+          <p class="text-sm font-medium">Background</p>
+          <div class="mt-3 h-10 rounded-lg border border-border bg-background"></div>
         </div>
-      </Card>
-
-      <Card as="article" tone="background">
-        <h3 class="text-xl tracking-tight">Simple card</h3>
-        <p class="mt-2 text-muted">
-          Use the background/surface pairing to separate content without heavy shadows.
-        </p>
-      </Card>
-    </div>
-  </section>
-
-  <hr class="my-10 border-border/60" />
-
-  <section class="space-y-6">
-    <h2 class="text-2xl tracking-tight">Form elements</h2>
-
-    <form class="grid gap-4 sm:max-w-lg">
-      <TextField label="Name" name="name" placeholder="Jane Doe" />
-      <TextAreaField label="Message" name="message" placeholder="Write a short note…" />
-
-      <div class="flex items-center gap-3">
-        <Button type="button" variant="primary">Submit</Button>
-        <p class="text-sm text-muted">This is just a visual style sample.</p>
+        <div class="rounded-xl border border-border bg-background p-4">
+          <p class="text-sm font-medium">Surface</p>
+          <div class="mt-3 h-10 rounded-lg border border-border bg-surface"></div>
+        </div>
+        <div class="rounded-xl border border-border bg-background p-4">
+          <p class="text-sm font-medium">Accent</p>
+          <div class="mt-3 h-10 rounded-lg border border-border bg-accent"></div>
+        </div>
+        <div class="rounded-xl border border-border bg-background p-4">
+          <p class="text-sm font-medium">Highlight</p>
+          <div class="mt-3 h-10 rounded-lg border border-border bg-highlight"></div>
+        </div>
       </div>
-    </form>
-  </section>
+    </section>
+
+    <hr class="my-10 border-border/60" />
+
+    <section class="space-y-6">
+      <h2 class="text-2xl tracking-tight">Buttons & badges</h2>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <Button href="#" variant="primary">Primary</Button>
+        <Button href="#" variant="secondary">Secondary</Button>
+        <Button href="#" variant="link">Text link</Button>
+
+        <span
+          class="ml-2 inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-xs"
+        >
+          Badge
+        </span>
+      </div>
+    </section>
+
+    <hr class="my-10 border-border/60" />
+
+    <section class="space-y-6">
+      <h2 class="text-2xl tracking-tight">Cards</h2>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <Card as="article" tone="surface">
+          <h3 class="text-xl tracking-tight">Project card</h3>
+          <p class="mt-2 text-muted">Short description with a little detail about the work.</p>
+          <div class="mt-4 flex items-center gap-3">
+            <Button href="#" variant="link" class="text-sm">View</Button>
+            <span class="text-xs text-muted">2026</span>
+          </div>
+        </Card>
+
+        <Card as="article" tone="background">
+          <h3 class="text-xl tracking-tight">Simple card</h3>
+          <p class="mt-2 text-muted">
+            Use the background/surface pairing to separate content without heavy shadows.
+          </p>
+        </Card>
+      </div>
+    </section>
+
+    <hr class="my-10 border-border/60" />
+
+    <section class="space-y-6">
+      <h2 class="text-2xl tracking-tight">Form elements</h2>
+
+      <form class="grid gap-4 sm:max-w-lg">
+        <TextField label="Name" name="name" placeholder="Jane Doe" />
+        <TextAreaField label="Message" name="message" placeholder="Write a short note…" />
+
+        <div class="flex items-center gap-3">
+          <Button type="button" variant="primary">Submit</Button>
+          <p class="text-sm text-muted">This is just a visual style sample.</p>
+        </div>
+      </form>
+    </section>
+  </Container>
 </BaseLayout>

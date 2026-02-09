@@ -1,0 +1,29 @@
+---
+type ContainerSize = 'content' | 'wide' | 'full'
+
+const {
+  as: Tag = 'div',
+  size = 'content',
+  pad = true,
+  class: className,
+  ...rest
+} = Astro.props as {
+  as?: string
+  size?: ContainerSize
+  pad?: boolean
+  class?: string
+}
+
+const sizeClass =
+  size === 'full'
+    ? 'w-full'
+    : size === 'wide'
+      ? 'mx-auto w-full max-w-6xl'
+      : 'mx-auto w-full max-w-4xl'
+
+const padClass = pad ? 'px-6' : ''
+---
+
+<Tag class:list={[sizeClass, padClass, className]} {...rest}>
+  <slot />
+</Tag>
