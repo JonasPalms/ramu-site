@@ -25,16 +25,16 @@ const {
 } = Astro.props as Props
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-accent'
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-focus-ring'
 
 const sizeClass = size === 'sm' ? 'px-4 py-1.5 text-sm' : 'px-5 py-2 text-sm'
 
 const variantClass =
   variant === 'primary'
-    ? 'bg-accent text-background hover:bg-accent-hover'
+    ? 'bg-button-primary-bg text-button-primary-fg hover:bg-button-primary-hover'
     : variant === 'secondary'
-      ? 'border border-border bg-surface text-foreground hover:bg-background'
-      : 'text-accent underline underline-offset-4 hover:text-accent-hover focus:ring-0'
+      ? 'border border-button-secondary-border bg-button-secondary-bg text-button-secondary-fg hover:bg-button-secondary-hover'
+      : 'text-interactive underline underline-offset-4 hover:text-interactive-active focus:ring-0'
 
 const classes = cn(base, sizeClass, variantClass, className)
 

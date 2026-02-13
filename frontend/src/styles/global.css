@@ -3,19 +3,31 @@
 @import './tags.css';
 
 @theme {
-  --color-background: var(--site-bg);
-  --color-foreground: var(--site-fg);
+  --color-background: var(--site-background);
+  --color-foreground: var(--site-foreground);
   --color-surface: var(--site-surface);
   --color-border: var(--site-border);
   --color-muted: var(--site-muted);
-  --color-accent: var(--site-accent);
-  --color-accent-hover: var(--site-accent-hover);
+  --color-interactive: var(--site-interactive);
+  --color-interactive-hover: var(--site-interactive-hover);
+  --color-interactive-active: var(--site-interactive-active);
+  --color-on-interactive: var(--site-on-interactive);
+  --color-focus-ring: var(--site-focus-ring);
+  --color-accent: var(--site-interactive);
+  --color-accent-hover: var(--site-interactive-active);
+  --color-button-primary-bg: var(--site-button-primary-bg);
+  --color-button-primary-fg: var(--site-button-primary-fg);
+  --color-button-primary-hover: var(--site-button-primary-hover);
+  --color-button-secondary-bg: var(--site-button-secondary-bg);
+  --color-button-secondary-fg: var(--site-button-secondary-fg);
+  --color-button-secondary-hover: var(--site-button-secondary-hover);
+  --color-button-secondary-border: var(--site-button-secondary-border);
   --color-highlight: var(--site-highlight);
 }
 
 html {
-  background: var(--site-bg);
-  color: var(--site-fg);
+  background: var(--site-background);
+  color: var(--site-foreground);
 }
 
 body {
