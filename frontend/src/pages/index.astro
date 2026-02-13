@@ -21,7 +21,7 @@ const home = sanity ? await sanity.fetch(pageBySlugQuery, { slug: homeSlug }) : 
       <RichText value={home?.content} />
     </Card>
     <div>
-      <Button href="/work" variant="secondary"> View work </Button>
+      <Button href="/work" variant="outline"> View work </Button>
     </div>
   </Container>
 </BaseLayout>

@@ -27,7 +27,7 @@ const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
                   <p class="mt-2 text-sm text-muted">{p.year ? p.year : '—'}</p>
                 </div>
                 <div class="shrink-0">
-                  <Button href={`/work/${p.slug}`} variant="secondary" size="sm">
+                  <Button href={`/work/${p.slug}`} variant="outline" size="sm">
                     View
                   </Button>
                 </div>

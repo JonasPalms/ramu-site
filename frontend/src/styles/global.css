@@ -18,10 +18,10 @@
   --color-button-primary-bg: var(--site-button-primary-bg);
   --color-button-primary-fg: var(--site-button-primary-fg);
   --color-button-primary-hover: var(--site-button-primary-hover);
-  --color-button-secondary-bg: var(--site-button-secondary-bg);
-  --color-button-secondary-fg: var(--site-button-secondary-fg);
-  --color-button-secondary-hover: var(--site-button-secondary-hover);
-  --color-button-secondary-border: var(--site-button-secondary-border);
+  --color-button-outline-bg: var(--site-button-outline-bg);
+  --color-button-outline-fg: var(--site-button-outline-fg);
+  --color-button-outline-hover: var(--site-button-outline-hover);
+  --color-button-outline-border: var(--site-button-outline-border);
   --color-highlight: var(--site-highlight);
 }
 

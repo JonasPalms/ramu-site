@@ -1,7 +1,7 @@
 ---
 import { cn } from '@/utils/cn'
 
-type Variant = 'primary' | 'secondary' | 'link'
+type Variant = 'primary' | 'outline' | 'link'
 type Size = 'sm' | 'md'
 
 type Props = {
@@ -32,8 +32,8 @@ const sizeClass = size === 'sm' ? 'px-4 py-1.5 text-sm' : 'px-5 py-2 text-sm'
 const variantClass =
   variant === 'primary'
     ? 'bg-button-primary-bg text-button-primary-fg hover:bg-button-primary-hover'
-    : variant === 'secondary'
-      ? 'border border-button-secondary-border bg-button-secondary-bg text-button-secondary-fg hover:bg-button-secondary-hover'
+    : variant === 'outline'
+      ? 'border border-button-outline-border bg-button-outline-bg text-button-outline-fg hover:bg-button-outline-hover'
       : 'text-interactive underline underline-offset-4 hover:text-interactive-active focus:ring-0'
 
 const classes = cn(base, sizeClass, variantClass, className)

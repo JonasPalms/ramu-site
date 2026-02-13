@@ -13,10 +13,10 @@
   --site-button-primary-bg: var(--site-interactive);
   --site-button-primary-fg: var(--site-on-interactive);
   --site-button-primary-hover: var(--site-interactive-hover);
-  --site-button-secondary-bg: var(--site-interactive);
-  --site-button-secondary-fg: var(--site-on-interactive);
-  --site-button-secondary-hover: var(--site-interactive-hover);
-  --site-button-secondary-border: transparent;
+  --site-button-outline-bg: var(--site-surface);
+  --site-button-outline-fg: var(--site-foreground);
+  --site-button-outline-hover: color-mix(in srgb, var(--site-surface), var(--site-interactive) 8%);
+  --site-button-outline-border: var(--site-border);
 
   --site-highlight: #c97c4a;
 }
@@ -36,10 +36,10 @@ html[data-theme='inkSand'] {
   --site-button-primary-bg: var(--site-interactive);
   --site-button-primary-fg: var(--site-on-interactive);
   --site-button-primary-hover: var(--site-interactive-hover);
-  --site-button-secondary-bg: var(--site-interactive);
-  --site-button-secondary-fg: var(--site-on-interactive);
-  --site-button-secondary-hover: var(--site-interactive-hover);
-  --site-button-secondary-border: transparent;
+  --site-button-outline-bg: var(--site-surface);
+  --site-button-outline-fg: var(--site-foreground);
+  --site-button-outline-hover: color-mix(in srgb, var(--site-surface), var(--site-interactive) 8%);
+  --site-button-outline-border: var(--site-border);
 
   --site-highlight: #9a6b2f;
 }
