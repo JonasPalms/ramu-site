@@ -1,0 +1,62 @@
+---
+import { urlForImage } from '@/lib/sanityImage'
+
+type HeroProject = {
+  title?: string
+  slug?: string
+  hero?: {
+    image?: unknown
+    alt?: string
+  }
+}
+
+const { title = 'Ramu', projects = [] } = Astro.props as {
+  title?: string
+  projects?: HeroProject[]
+}
+
+const imageProjects = projects
+  .map((project) => ({
+    ...project,
+    imageUrl: project?.hero?.image
+      ? (urlForImage(project.hero.image)
+          ?.width(1200)
+          .height(1200)
+          .fit('crop')
+          .auto('format')
+          .url() ?? null)
+      : null,
+  }))
+  .filter((project): project is HeroProject & { imageUrl: string } => Boolean(project.imageUrl))
+
+const gridItems = Array.from({ length: 9 }, (_, index) => {
+  if (!imageProjects.length) return null
+  return imageProjects[index % imageProjects.length]
+})
+---
+
+<section class="space-y-4">
+  <header class="px-4 pt-2 text-left sm:px-6">
+    <h1 class="text-4xl tracking-tight sm:text-5xl">{title}</h1>
+    <p class="mt-1 text-sm text-muted sm:text-base">Freelance director and video journalist</p>
+  </header>
+
+  <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+    {
+      gridItems.map((item) =>
+        item ? (
+          <a href={item.slug ? `/work/${item.slug}` : '/work'} class="block overflow-hidden bg-surface">
+            <img
+              src={item.imageUrl}
+              alt={item.hero?.alt || item.title || ''}
+              loading="lazy"
+              class="aspect-square h-full w-full object-cover"
+            />
+          </a>
+        ) : (
+          <div class="aspect-square bg-surface" aria-hidden="true"></div>
+        ),
+      )
+    }
+  </div>
+</section>
