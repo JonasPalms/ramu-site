@@ -6,12 +6,15 @@ import { ClientRouter } from 'astro:transitions'
 import { sanity } from '../lib/sanity'
 import { siteSettingsQuery } from '../lib/sanityQueries'
 
+const THEME_PRESETS = ['sandGreen', 'inkSand'] as const
+const DEFAULT_THEME_PRESET = THEME_PRESETS[0]
+
 const settings = sanity ? await sanity.fetch<any>(siteSettingsQuery) : null
 const themePreset =
   typeof settings?.themePreset === 'string' &&
-  ['sandGreen', 'inkSand'].includes(settings.themePreset)
+  THEME_PRESETS.includes(settings.themePreset as (typeof THEME_PRESETS)[number])
     ? settings.themePreset
-    : 'sandGreen'
+    : DEFAULT_THEME_PRESET
 
 const { title } = Astro.props as { title?: string }
 ---

@@ -1,0 +1,20 @@
+:root {
+  --site-radius-sm: 0.25rem;
+  --site-radius-md: 0.5rem;
+  --site-radius-lg: 0.75rem;
+  --site-radius-pill: 9999px;
+
+  --site-radius-button: var(--site-radius-md);
+  --site-radius-input: var(--site-radius-md);
+  --site-radius-card: var(--site-radius-lg);
+  --site-radius-focus: var(--site-radius-sm);
+  --site-radius-badge: var(--site-radius-pill);
+
+  --site-button-primary-bg: var(--site-interactive);
+  --site-button-primary-fg: var(--site-on-interactive);
+  --site-button-primary-hover: var(--site-interactive-hover);
+  --site-button-outline-bg: var(--site-surface);
+  --site-button-outline-fg: var(--site-foreground);
+  --site-button-outline-hover: color-mix(in srgb, var(--site-surface), var(--site-interactive) 8%);
+  --site-button-outline-border: var(--site-border);
+}

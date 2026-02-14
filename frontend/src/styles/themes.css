@@ -1,7 +1,8 @@
-:root {
+:root,
+html[data-theme='sandGreen'] {
   --site-background: #f7efe2;
   --site-foreground: #1f3a2e;
-  --site-surface: #fff8ee;
+  --site-surface: #fffdf8;
   --site-border: #e3d6c3;
   --site-muted: #4e6b5b;
   --site-interactive: #356f53;
@@ -9,15 +10,6 @@
   --site-interactive-active: #264f3c;
   --site-on-interactive: #f7efe2;
   --site-focus-ring: #356f53;
-
-  --site-button-primary-bg: var(--site-interactive);
-  --site-button-primary-fg: var(--site-on-interactive);
-  --site-button-primary-hover: var(--site-interactive-hover);
-  --site-button-outline-bg: var(--site-surface);
-  --site-button-outline-fg: var(--site-foreground);
-  --site-button-outline-hover: color-mix(in srgb, var(--site-surface), var(--site-interactive) 8%);
-  --site-button-outline-border: var(--site-border);
-
   --site-highlight: #c97c4a;
 }
 
@@ -32,14 +24,5 @@ html[data-theme='inkSand'] {
   --site-interactive-active: #0f4453;
   --site-on-interactive: #f5efe5;
   --site-focus-ring: #145a6d;
-
-  --site-button-primary-bg: var(--site-interactive);
-  --site-button-primary-fg: var(--site-on-interactive);
-  --site-button-primary-hover: var(--site-interactive-hover);
-  --site-button-outline-bg: var(--site-surface);
-  --site-button-outline-fg: var(--site-foreground);
-  --site-button-outline-hover: color-mix(in srgb, var(--site-surface), var(--site-interactive) 8%);
-  --site-button-outline-border: var(--site-border);
-
   --site-highlight: #9a6b2f;
 }

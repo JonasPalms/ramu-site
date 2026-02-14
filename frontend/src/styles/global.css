@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import './themes.css';
-@import './tags.css';
+@import './ui-tokens.css';
+@import './tags/headings.css';
+@import './tags/a.css';
 
 @theme {
   --color-background: var(--site-background);
@@ -39,12 +41,6 @@ body {
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
-}
-
-h1,
-h2,
-h3 {
-  font-family: Fraunces, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 ::selection {

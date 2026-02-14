@@ -9,7 +9,11 @@ import { allPageSlugsQuery, pageBySlugQuery } from '@/lib/sanityQueries'
 export async function getStaticPaths() {
   if (!sanity) return []
   const pages = await sanity.fetch<{ slug: string }[]>(allPageSlugsQuery)
-  return pages.filter((p) => p.slug && p.slug !== 'home').map((p) => ({ params: { slug: p.slug } }))
+  return pages.flatMap((p) => {
+    const slug = typeof p?.slug === 'string' ? p.slug.trim() : ''
+    if (!slug || slug === 'home' || slug.includes('/')) return []
+    return [{ params: { slug } }]
+  })
 }
 
 const { slug } = Astro.params
