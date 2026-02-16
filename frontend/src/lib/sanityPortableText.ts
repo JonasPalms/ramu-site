@@ -12,7 +12,14 @@ export function portableTextToHtml(value: unknown): string {
           const alt = value?.alt || ''
           const caption = value?.caption
 
-          const url = urlForImage(img)?.width(1600).fit('max').auto('format').url()
+          if (!img?.asset?._ref) return ''
+
+          let url: string | null = null
+          try {
+            url = urlForImage(img)?.width(1600).fit('max').auto('format').url() ?? null
+          } catch {
+            return ''
+          }
           if (!url) return ''
 
           const figcaption = caption

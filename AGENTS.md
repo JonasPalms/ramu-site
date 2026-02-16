@@ -129,6 +129,7 @@ Guidance for coding agents working in `ramu-site`.
 ## 9) Astro and UI patterns
 
 - Keep page shells in `frontend/src/pages` minimal; push reusable UI into components.
+- Prefer file-based component extraction when a file grows in responsibility/size; avoid monolithic layout/page files when a focused component is appropriate.
 - Use `BaseLayout.astro` for global CSS and document metadata wiring.
 - Reuse existing UI primitives (`Button`, `Card`, `Container`) when possible.
 - Prefer semantic HTML structure before styling concerns.

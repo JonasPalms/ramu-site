@@ -1,22 +1,32 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import RichText from '@/components/RichText.astro'
 import Button from '@/components/ui/Button.astro'
 import Card from '@/components/ui/Card.astro'
 import Container from '@/components/layout/Container.astro'
 import { sanity } from '@/lib/sanity'
-import { projectsIndexQuery } from '@/lib/sanityQueries'
+import { projectsIndexQuery, projectsPageQuery } from '@/lib/sanityQueries'
 
+const projectsPage = sanity ? await sanity.fetch<any>(projectsPageQuery) : null
 const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
 ---
 
-<BaseLayout title="Work">
-  <Container>
+<BaseLayout title={projectsPage?.seo?.metaTitle || projectsPage?.title || 'Projects'}>
+  <Container class="space-y-6">
     <header class="space-y-3">
-      <h1 class="text-4xl tracking-tight">Work</h1>
-      <p class="text-muted">Selected projects and films.</p>
+      <h1 class="text-4xl tracking-tight">{projectsPage?.title || 'Projects'}</h1>
+      {
+        projectsPage?.intro ? (
+          <Card tone="background">
+            <RichText value={projectsPage.intro} />
+          </Card>
+        ) : (
+          <p class="text-muted">Selected projects and films.</p>
+        )
+      }
     </header>
 
-    <div class="mt-10 grid gap-4">
+    <div class="grid gap-4">
       {
         projects.length ? (
           <>
@@ -27,7 +37,7 @@ const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
                   <p class="mt-2 text-sm text-muted">{p.year ? p.year : '—'}</p>
                 </div>
                 <div class="shrink-0">
-                  <Button href={`/work/${p.slug}`} variant="outline" size="sm">
+                  <Button href={`/projects/${p.slug}`} variant="outline" size="sm">
                     View
                   </Button>
                 </div>

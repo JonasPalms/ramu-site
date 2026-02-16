@@ -3,16 +3,23 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import Container from '@/components/layout/Container.astro'
 import FrontpageHero from '@/components/hero/FrontpageHero.astro'
 import { sanity } from '../lib/sanity'
-import { pageBySlugQuery, projectsIndexQuery, siteSettingsQuery } from '../lib/sanityQueries'
+import { homePageQuery, projectsIndexQuery, siteSettingsQuery } from '../lib/sanityQueries'
 
 const settings = sanity ? await sanity.fetch(siteSettingsQuery) : null
-const homeSlug = settings?.homeSlug || 'home'
-const home = sanity ? await sanity.fetch(pageBySlugQuery, { slug: homeSlug }) : null
-const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
+const home = sanity ? await sanity.fetch<any>(homePageQuery) : null
+const allProjects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
+const projects =
+  Array.isArray(home?.featuredProjects) && home.featuredProjects.length
+    ? home.featuredProjects
+    : allProjects
 ---
 
 <BaseLayout title={home?.title || settings?.title || 'Home'}>
   <Container size="full">
-    <FrontpageHero title={settings?.title || 'Ramu'} projects={projects} />
+    <FrontpageHero
+      title={home?.title || settings?.title || 'Ramu'}
+      subtitle={home?.subtitle || 'Freelance director and video journalist'}
+      projects={projects}
+    />
   </Container>
 </BaseLayout>

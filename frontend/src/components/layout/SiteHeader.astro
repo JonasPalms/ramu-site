@@ -1,0 +1,55 @@
+---
+type NavItem = {
+  label?: string
+  pageSlug?: string
+  externalUrl?: string
+}
+
+const { navigation = [] } = Astro.props as {
+  navigation?: NavItem[]
+}
+---
+
+<header
+  class="site-nav fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm"
+>
+  <div
+    class="mx-auto flex h-(--site-nav-height) w-full max-w-6xl items-center justify-between px-6"
+  >
+    <a href="/" class="font-[Fraunces] text-md font-semibold lowercase tracking-wide"
+      >rasmus sandager</a
+    >
+    <nav aria-label="Main">
+      <ul class="flex items-center gap-5 text-sm">
+        {
+          navigation.map((item) => {
+            const href = item?.externalUrl || (item?.pageSlug ? `/${item.pageSlug}` : null)
+            if (!href || !item?.label) return null
+
+            return (
+              <li>
+                <a href={href} class="text-muted transition-colors hover:text-foreground">
+                  {item.label}
+                </a>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    transform: translateY(calc(var(--nav-hide) * -110%));
+    transition: transform 220ms ease;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav {
+      transition: none;
+    }
+  }
+</style>

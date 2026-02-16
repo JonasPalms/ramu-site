@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import RichText from '@/components/RichText.astro'
-import Button from '@/components/ui/Button.astro'
 import Card from '@/components/ui/Card.astro'
 import Container from '@/components/layout/Container.astro'
 import { sanity } from '@/lib/sanity'
@@ -26,7 +25,7 @@ const heroUrl =
   <Container>
     <header class="space-y-3">
       <div>
-        <a href="/work">Back to work</a>
+        <a href="/projects">Back to projects</a>
       </div>
       <h1 class="text-4xl tracking-tight">{project.title}</h1>
       {project.year ? <p class="text-muted">{project.year}</p> : null}

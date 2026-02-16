@@ -4,7 +4,6 @@ export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site settings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({ name: 'title', title: 'Site title', type: 'string' }),
     defineField({
@@ -20,12 +19,6 @@ export const siteSettings = defineType({
         layout: 'dropdown',
       },
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'homePage',
-      title: 'Home page',
-      type: 'reference',
-      to: [{ type: 'page' }],
     }),
     defineField({
       name: 'navigation',
@@ -44,10 +37,17 @@ export const siteSettings = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: 'page',
-              title: 'Page',
-              type: 'reference',
-              to: [{ type: 'page' }],
+              name: 'route',
+              title: 'Internal route',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Projects', value: 'projects' },
+                  { title: 'About', value: 'about' },
+                  { title: 'Contact', value: 'contact' },
+                ],
+                layout: 'dropdown',
+              },
             }),
             defineField({
               name: 'externalUrl',

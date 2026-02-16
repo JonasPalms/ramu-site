@@ -28,6 +28,13 @@
 }
 
 html {
+  --site-nav-height: 64px;
+  --nav-hide: 0;
+  --scroll-y: 0;
+  --scroll-distance: 0;
+  --scroll-progress: 0;
+  --scroll-direction: 0;
+  --scroll-delta: 0;
   background: var(--site-background);
   color: var(--site-foreground);
 }

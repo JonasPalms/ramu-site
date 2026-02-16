@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import RichText from '@/components/RichText.astro'
+import Card from '@/components/ui/Card.astro'
+import Container from '@/components/layout/Container.astro'
+import { sanity } from '@/lib/sanity'
+import { aboutPageQuery } from '@/lib/sanityQueries'
+
+const page = sanity ? await sanity.fetch<any>(aboutPageQuery) : null
+---
+
+<BaseLayout title={page?.seo?.metaTitle || page?.title || 'About'}>
+  <Container class="space-y-6">
+    <header class="space-y-3">
+      <h1 class="text-4xl tracking-tight">{page?.title || 'About'}</h1>
+    </header>
+    <Card tone="surface">
+      <RichText value={page?.content} />
+    </Card>
+  </Container>
+</BaseLayout>
