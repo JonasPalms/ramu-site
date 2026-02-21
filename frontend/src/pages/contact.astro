@@ -10,7 +10,7 @@ const page = sanity ? await sanity.fetch<any>(contactPageQuery) : null
 ---
 
 <BaseLayout title={page?.seo?.metaTitle || page?.title || 'Contact'}>
-  <Container class="space-y-6">
+  <Container size="wide" class="space-y-6">
     <header class="space-y-3">
       <h1 class="text-4xl tracking-tight">{page?.title || 'Contact'}</h1>
     </header>

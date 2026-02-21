@@ -22,7 +22,7 @@ const heroUrl =
 ---
 
 <BaseLayout title={project?.title || slug}>
-  <Container>
+  <Container size="wide" class="space-y-6">
     <header class="space-y-3">
       <div>
         <a href="/projects">Back to projects</a>
@@ -30,28 +30,26 @@ const heroUrl =
       <h1 class="text-4xl tracking-tight">{project.title}</h1>
       {project.year ? <p class="text-muted">{project.year}</p> : null}
     </header>
-  </Container>
-  {
-    heroUrl ? (
-      <Container size="full" class="mt-10">
-        <Card tone="background" class="overflow-hidden p-0">
+    {
+      heroUrl ? (
+        <section class="pt-4">
           <img
             src={heroUrl}
             alt={project.hero?.alt || ''}
             loading="lazy"
             class="aspect-video w-full object-cover"
           />
-        </Card>
-      </Container>
-    ) : null
-  }
-  {
-    project.body ? (
-      <Container class="mt-6">
-        <Card tone="surface">
-          <RichText value={project.body} />
-        </Card>
-      </Container>
-    ) : null
-  }
+        </section>
+      ) : null
+    }
+    {
+      project.body ? (
+        <section>
+          <Card tone="surface">
+            <RichText value={project.body} />
+          </Card>
+        </section>
+      ) : null
+    }
+  </Container>
 </BaseLayout>

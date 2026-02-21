@@ -1,4 +1,6 @@
 ---
+import Container from '@/components/layout/Container.astro'
+
 type NavItem = {
   label?: string
   pageSlug?: string
@@ -13,9 +15,7 @@ const { navigation = [] } = Astro.props as {
 <header
   class="site-nav fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm"
 >
-  <div
-    class="mx-auto flex h-(--site-nav-height) w-full max-w-6xl items-center justify-between px-6"
-  >
+  <Container as="div" size="full" class="flex h-(--site-nav-height) items-center justify-between">
     <a href="/" class="font-[Fraunces] text-md font-semibold lowercase tracking-wide"
       >rasmus sandager</a
     >
@@ -37,7 +37,7 @@ const { navigation = [] } = Astro.props as {
         }
       </ul>
     </nav>
-  </div>
+  </Container>
 </header>
 
 <style>
