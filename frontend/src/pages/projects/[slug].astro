@@ -22,7 +22,7 @@ const heroUrl =
 ---
 
 <BaseLayout title={project?.title || slug}>
-  <Container size="wide" class="space-y-6">
+  <Container size="wide" class="space-y-8">
     <header class="space-y-3">
       <div>
         <a href="/projects">Back to projects</a>
@@ -32,7 +32,7 @@ const heroUrl =
     </header>
     {
       heroUrl ? (
-        <section class="pt-4">
+        <section class="pt-6">
           <img
             src={heroUrl}
             alt={project.hero?.alt || ''}

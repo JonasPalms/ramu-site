@@ -41,7 +41,7 @@ const navigation = Array.isArray(settings?.navigation) ? settings.navigation : [
   </head>
   <body class="min-h-screen bg-background text-foreground">
     <SiteHeader navigation={navigation} />
-    <main class="pb-10 pt-[calc(var(--site-nav-height)+1.25rem)]">
+    <main class="pb-10 pt-[calc(var(--site-nav-height)+2rem)] sm:pt-[calc(var(--site-nav-height)+2.5rem)]">
       <slot />
     </main>
   </body>

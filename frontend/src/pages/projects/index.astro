@@ -13,7 +13,7 @@ const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
 ---
 
 <BaseLayout title={projectsPage?.seo?.metaTitle || projectsPage?.title || 'Projects'}>
-  <Container size="wide" class="space-y-6">
+  <Container size="wide" class="space-y-8">
     <header class="space-y-3">
       <h1 class="text-4xl tracking-tight">{projectsPage?.title || 'Projects'}</h1>
       {
