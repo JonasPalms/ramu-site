@@ -12,18 +12,16 @@ const projectsPage = sanity ? await sanity.fetch<any>(projectsPageQuery) : null
 const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
 ---
 
-<BaseLayout title={projectsPage?.seo?.metaTitle || projectsPage?.title || 'Projects'}>
+<BaseLayout title={projectsPage?.seo?.metaTitle || projectsPage?.title}>
   <Container size="wide" class="space-y-8">
     <header class="space-y-3">
-      <h1 class="text-4xl tracking-tight">{projectsPage?.title || 'Projects'}</h1>
+      {projectsPage?.title ? <h1 class="text-4xl tracking-tight">{projectsPage.title}</h1> : null}
       {
         projectsPage?.intro ? (
-          <Card tone="background">
+          <section class="max-w-3xl">
             <RichText value={projectsPage.intro} />
-          </Card>
-        ) : (
-          <p class="text-muted">Selected projects and films.</p>
-        )
+          </section>
+        ) : null
       }
     </header>
 
@@ -66,11 +64,7 @@ const projects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
               </Card>
             ))}
           </>
-        ) : (
-          <Card tone="background">
-            <p class="text-muted">No projects yet.</p>
-          </Card>
-        )
+        ) : null
       }
     </div>
   </Container>
