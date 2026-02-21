@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const homePage = defineType({
   name: 'homePage',
@@ -20,11 +20,16 @@ export const homePage = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      type: 'array' as const,
       name: 'featuredProjects',
       title: 'Featured projects',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'project' }] }],
-      validation: (Rule) => Rule.max(9),
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: [{ type: 'project' }],
+        }),
+      ],
+      validation: (Rule) => Rule.max(9).unique(),
       description: 'Used in the 3x3 hero grid. Max 9.',
     }),
   ],
