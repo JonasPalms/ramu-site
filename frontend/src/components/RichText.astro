@@ -6,3 +6,21 @@ const html = portableTextToHtml(value)
 ---
 
 <div class="prose" set:html={html} />
+
+<style>
+  :global(.prose p) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.prose p:last-child) {
+    margin-bottom: 0;
+  }
+
+  :global(.prose ul) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.prose ul:last-child) {
+    margin-bottom: 0;
+  }
+</style>

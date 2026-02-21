@@ -26,5 +26,10 @@ export const aboutPage = defineType({
       title: 'Content',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'portrait',
+      title: 'Portrait image',
+      type: 'figure',
+    }),
   ],
 })

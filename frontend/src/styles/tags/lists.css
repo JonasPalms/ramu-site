@@ -1,0 +1,18 @@
+ul,
+ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}

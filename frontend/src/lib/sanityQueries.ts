@@ -20,12 +20,14 @@ export const aboutPageQuery = defineQuery(`coalesce(
   *[_type == "aboutPage"][0]{
     title,
     seo{metaTitle, metaDescription},
-    content
+    content,
+    portrait
   },
   *[_type == "page" && slug.current == "about"][0]{
     title,
     seo{metaTitle, metaDescription},
-    content
+    content,
+    portrait
   }
 )`)
 

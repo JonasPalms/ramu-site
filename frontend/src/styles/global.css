@@ -3,6 +3,7 @@
 @import './ui-tokens.css';
 @import './tags/headings.css';
 @import './tags/a.css';
+@import './tags/lists.css';
 
 @theme {
   --color-background: var(--site-background);
