@@ -1,15 +1,12 @@
 {
   "name": "ramu-site",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "studio"
-  ],
+  "packageManager": "pnpm@10.16.1",
   "scripts": {
-    "dev": "npm run dev -w frontend",
-    "build": "npm run build -w frontend",
-    "preview": "npm run preview -w frontend",
-    "studio": "npm run dev -w studio",
+    "dev": "pnpm --filter frontend dev",
+    "build": "pnpm --filter frontend build",
+    "preview": "pnpm --filter frontend preview",
+    "studio": "pnpm --filter ramu-studio dev",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
