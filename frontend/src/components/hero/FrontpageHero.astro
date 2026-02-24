@@ -43,7 +43,7 @@ const gridItems = Array.from({ length: 9 }, (_, index) => imageProjects[index] ?
     <p class="mt-1 text-sm text-muted sm:text-base">{subtitle}</p>
   </header>
 
-  <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+  <div class="grid grid-cols-1 gap-1.5 md:grid-cols-3 md:gap-2">
     {
       gridItems.map((item) =>
         item ? (
