@@ -4,7 +4,7 @@ Guidance for coding agents working in `ramu-site`.
 
 ## 1) Repository shape
 
-- Monorepo with npm workspaces.
+- Monorepo with pnpm workspaces.
 - `frontend/`: Astro 5 static site, Tailwind CSS 4, Sanity content fetching.
 - `studio/`: Sanity Studio 3 schemas and editor app.
 - Root owns shared tooling (Prettier) and convenience scripts.
@@ -19,8 +19,8 @@ Guidance for coding agents working in `ramu-site`.
 ## 3) Setup and install
 
 - Install dependencies from root:
-- `npm install`
-- Requires Node/npm compatible with Astro 5 and Sanity 3.
+- `corepack enable && pnpm install`
+- Requires Node/pnpm compatible with Astro 5 and Sanity 5.
 - Frontend env vars used by Sanity client:
 - `SANITY_PROJECT_ID`
 - `SANITY_DATASET`
@@ -33,42 +33,42 @@ Guidance for coding agents working in `ramu-site`.
 ### Root commands
 
 - Start frontend dev server:
-- `npm run dev`
+- `pnpm dev`
 - Build frontend:
-- `npm run build`
+- `pnpm build`
 - Preview frontend build:
-- `npm run preview`
+- `pnpm preview`
 - Run Sanity Studio dev server:
-- `npm run studio`
+- `pnpm studio`
 - Format all files:
-- `npm run format`
+- `pnpm format`
 - Check formatting only:
-- `npm run format:check`
+- `pnpm format:check`
 
 ### Workspace-specific commands
 
 - Frontend dev:
-- `npm run dev -w frontend`
+- `pnpm --filter frontend dev`
 - Frontend build:
-- `npm run build -w frontend`
+- `pnpm --filter frontend build`
 - Frontend preview:
-- `npm run preview -w frontend`
+- `pnpm --filter frontend preview`
 - Astro CLI passthrough:
-- `npm run astro -w frontend -- <args>`
+- `pnpm --filter frontend astro -- <args>`
 - Studio dev:
-- `npm run dev -w studio`
+- `pnpm --filter ramu-studio dev`
 - Studio build:
-- `npm run build -w studio`
+- `pnpm --filter ramu-studio build`
 - Studio deploy:
-- `npm run deploy -w studio`
+- `pnpm --filter ramu-studio deploy`
 - Studio GraphQL deploy:
-- `npm run deploy-graphql -w studio`
+- `pnpm --filter ramu-studio deploy-graphql`
 - Studio schema extract:
-- `npm run schema:extract -w studio`
+- `pnpm --filter ramu-studio schema:extract`
 - Studio typegen:
-- `npm run typegen -w studio`
+- `pnpm --filter ramu-studio typegen`
 - Studio schema+typegen:
-- `npm run typegen:all -w studio`
+- `pnpm --filter ramu-studio typegen:all`
 
 ### Lint / type-check status
 
@@ -76,17 +76,17 @@ Guidance for coding agents working in `ramu-site`.
 - No dedicated test runner is currently configured.
 - Use build as the primary safety check in this repo.
 - Optional Astro diagnostics:
-- `npm run astro -w frontend -- check`
+- `pnpm --filter frontend astro -- check`
 
 ### Test commands (current and future)
 
 - Current state: no test scripts in root/frontend/studio `package.json`.
 - If tests are added later, expose them as:
-- `npm run test -w frontend`
+- `pnpm --filter frontend test`
 - Single test file (recommended future pattern):
-- `npm run test -w frontend -- path/to/test-file.test.ts`
+- `pnpm --filter frontend test -- path/to/test-file.test.ts`
 - Single test by name (recommended future pattern):
-- `npm run test -w frontend -- -t "test name"`
+- `pnpm --filter frontend test -- -t "test name"`
 - Until then, do not claim tests were run; report that tests are not configured.
 
 ## 5) Code style and formatting
@@ -98,7 +98,7 @@ Guidance for coding agents working in `ramu-site`.
 - `trailingComma: all`.
 - `prettier-plugin-astro` enabled.
 - `*.astro` uses Astro parser override.
-- Run `npm run format` after meaningful edits.
+- Run `pnpm format` after meaningful edits.
 
 ## 6) TypeScript and typing expectations
 
@@ -177,6 +177,6 @@ Guidance for coding agents working in `ramu-site`.
 ## 15) Definition of done for most changes
 
 - Code follows the conventions in this file.
-- Formatting passes (`npm run format:check`) or files are formatted.
-- Frontend build passes (`npm run build -w frontend`) for UI changes.
+- Formatting passes (`pnpm format:check`) or files are formatted.
+- Frontend build passes (`pnpm --filter frontend build`) for UI changes.
 - Any unrun checks are clearly called out in handoff.
