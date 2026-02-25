@@ -1,0 +1,83 @@
+---
+type CvEntry = {
+  _key?: string
+  title?: string | null
+  subtitle?: string | null
+  period?: string | null
+}
+
+type Props = {
+  education?: CvEntry[] | null
+  experience?: CvEntry[] | null
+}
+
+const { education = [], experience = [] } = Astro.props as Props
+
+const hasEducation = Array.isArray(education) && education.length > 0
+const hasExperience = Array.isArray(experience) && experience.length > 0
+---
+
+{
+  hasEducation || hasExperience ? (
+    <section
+      class="space-y-6 rounded-[var(--site-radius-card)] border border-border bg-surface p-6 md:p-8"
+      aria-label="Curriculum vitae"
+    >
+      <header>
+        <h2 class="text-2xl tracking-tight">Curriculum vitae</h2>
+      </header>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <article>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.08em] text-muted">Education</h3>
+          {hasEducation ? (
+            <ul class="mt-5 space-y-6 border-l border-border pl-6">
+              {education.map((entry) => (
+                <li class="relative">
+                  <span
+                    class="absolute -left-[1.86rem] top-2 h-3 w-3 rounded-full border-2 border-surface bg-interactive"
+                    aria-hidden="true"
+                  />
+                  {entry.period ? (
+                    <p class="text-xs font-medium uppercase tracking-[0.08em] text-muted">
+                      {entry.period}
+                    </p>
+                  ) : null}
+                  <p class="text-lg leading-tight">{entry.title}</p>
+                  <p class="text-sm text-muted">{entry.subtitle}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="mt-5 text-sm text-muted">No education entries added yet.</p>
+          )}
+        </article>
+
+        <article>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.08em] text-muted">Experience</h3>
+          {hasExperience ? (
+            <ul class="mt-5 space-y-6 border-l border-border pl-6">
+              {experience.map((entry) => (
+                <li class="relative">
+                  <span
+                    class="absolute -left-[1.86rem] top-2 h-3 w-3 rounded-full border-2 border-surface bg-highlight"
+                    aria-hidden="true"
+                  />
+                  {entry.period ? (
+                    <p class="text-xs font-medium uppercase tracking-[0.08em] text-muted">
+                      {entry.period}
+                    </p>
+                  ) : null}
+                  <p class="text-lg leading-tight">{entry.title}</p>
+                  <p class="text-sm text-muted">{entry.subtitle}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="mt-5 text-sm text-muted">No experience entries added yet.</p>
+          )}
+        </article>
+      </div>
+    </section>
+  ) : null
+}
