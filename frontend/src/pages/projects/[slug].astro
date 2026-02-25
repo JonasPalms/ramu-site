@@ -3,18 +3,21 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import RichText from '@/components/RichText.astro'
 import Card from '@/components/ui/Card.astro'
 import Container from '@/components/layout/Container.astro'
+import { languageQueryParams } from '@/lib/i18n'
 import { sanity } from '@/lib/sanity'
 import { allProjectSlugsQuery, projectBySlugQuery } from '@/lib/sanityQueries'
 import { urlForImage } from '@/lib/sanityImage'
 
 export async function getStaticPaths() {
   if (!sanity) return []
-  const projects = await sanity.fetch<{ slug: string }[]>(allProjectSlugsQuery)
+  const projects = await sanity.fetch<{ slug: string }[]>(allProjectSlugsQuery, languageQueryParams)
   return projects.map((p) => ({ params: { slug: p.slug } }))
 }
 
 const { slug } = Astro.params
-const project = sanity ? await sanity.fetch<any>(projectBySlugQuery, { slug }) : null
+const project = sanity
+  ? await sanity.fetch<any>(projectBySlugQuery, { ...languageQueryParams, slug })
+  : null
 
 const projectTypeLabel: Record<string, string> = {
   documentary: 'Documentary',
@@ -40,7 +43,7 @@ const heroUrl =
         Array.isArray(project.projectTypes) && project.projectTypes.length ? (
           <div class="flex flex-wrap gap-2 pt-1">
             {project.projectTypes.map((type: string) => (
-              <span class="inline-flex items-center rounded-[var(--site-radius-badge)] border border-border bg-surface px-3 py-1 text-xs text-muted">
+              <span class="inline-flex items-center rounded-(--site-radius-badge) border border-border bg-surface px-3 py-1 text-xs text-muted">
                 {projectTypeLabel[type] || type}
               </span>
             ))}

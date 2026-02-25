@@ -1,7 +1,7 @@
 import { defineQuery } from 'groq'
 
 export const homePageQuery = defineQuery(`coalesce(
-  *[_type == "homePage"][0]{
+  *[_type == "homePage" && coalesce(language, $baseLanguage) == $language][0]{
     title,
     subtitle,
     featuredProjects[]->{
@@ -17,7 +17,7 @@ export const homePageQuery = defineQuery(`coalesce(
 )`)
 
 export const aboutPageQuery = defineQuery(`coalesce(
-  *[_type == "aboutPage"][0]{
+  *[_type == "aboutPage" && coalesce(language, $baseLanguage) == $language][0]{
     title,
     seo{metaTitle, metaDescription},
     content,
@@ -36,7 +36,7 @@ export const aboutPageQuery = defineQuery(`coalesce(
 )`)
 
 export const projectsPageQuery = defineQuery(`coalesce(
-  *[_type == "projectsPage"][0]{
+  *[_type == "projectsPage" && coalesce(language, $baseLanguage) == $language][0]{
     title,
     seo{metaTitle, metaDescription},
     "intro": intro
@@ -52,7 +52,7 @@ export const projectsPageQuery = defineQuery(`coalesce(
 )`)
 
 export const contactPageQuery = defineQuery(`coalesce(
-  *[_type == "contactPage"][0]{
+  *[_type == "contactPage" && coalesce(language, $baseLanguage) == $language][0]{
     title,
     seo{metaTitle, metaDescription},
     content
@@ -65,16 +65,18 @@ export const contactPageQuery = defineQuery(`coalesce(
 )`)
 
 export const allProjectSlugsQuery = defineQuery(
-  `*[_type == "project" && defined(slug.current)]{ "slug": slug.current }`,
+  `*[_type == "project" && defined(slug.current) && coalesce(language, $baseLanguage) == $language]{ "slug": slug.current }`,
 )
-export const projectsIndexQuery = defineQuery(`*[_type == "project"]|order(year desc, title asc){
+export const projectsIndexQuery =
+  defineQuery(`*[_type == "project" && coalesce(language, $baseLanguage) == $language]|order(year desc, title asc){
   title,
   "slug": slug.current,
   year,
   projectTypes,
   hero
 }`)
-export const projectBySlugQuery = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
+export const projectBySlugQuery =
+  defineQuery(`*[_type == "project" && slug.current == $slug && coalesce(language, $baseLanguage) == $language][0]{
   title,
   "slug": slug.current,
   year,

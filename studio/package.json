@@ -12,6 +12,7 @@
     "typegen:all": "npm run schema:extract && npm run typegen"
   },
   "dependencies": {
+    "@sanity/document-internationalization": "^5.0.2",
     "@sanity/vision": "^3.96.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

@@ -4,10 +4,11 @@ import RichText from '@/components/RichText.astro'
 import Container from '@/components/layout/Container.astro'
 import CvTimeline from '@/components/about/CvTimeline.astro'
 import { sanity } from '@/lib/sanity'
+import { languageQueryParams } from '@/lib/i18n'
 import { urlForImage } from '@/lib/sanityImage'
 import { aboutPageQuery } from '@/lib/sanityQueries'
 
-const page = sanity ? await sanity.fetch<any>(aboutPageQuery) : null
+const page = sanity ? await sanity.fetch<any>(aboutPageQuery, languageQueryParams) : null
 const portraitUrl =
   page?.portrait?.image &&
   urlForImage(page.portrait.image)?.width(1000).height(1250).fit('crop').auto('format').url()

@@ -3,11 +3,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import Container from '@/components/layout/Container.astro'
 import FrontpageHero from '@/components/hero/FrontpageHero.astro'
 import { sanity } from '../lib/sanity'
+import { languageQueryParams } from '@/lib/i18n'
 import { homePageQuery, projectsIndexQuery, siteSettingsQuery } from '../lib/sanityQueries'
 
 const settings = sanity ? await sanity.fetch(siteSettingsQuery) : null
-const home = sanity ? await sanity.fetch<any>(homePageQuery) : null
-const allProjects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery) : []
+const home = sanity ? await sanity.fetch<any>(homePageQuery, languageQueryParams) : null
+const allProjects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery, languageQueryParams) : []
 const projects =
   Array.isArray(home?.featuredProjects) && home.featuredProjects.length
     ? home.featuredProjects

@@ -1,10 +1,24 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { supportedLanguages, baseLanguage } from '../localization'
 
 export const aboutPage = defineType({
   name: 'aboutPage',
   title: 'About page',
   type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      title: 'Language',
+      type: 'string',
+      initialValue: baseLanguage,
+      options: {
+        list: supportedLanguages.map((language) => ({
+          title: language.title,
+          value: language.id,
+        })),
+      },
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -15,7 +29,7 @@ export const aboutPage = defineType({
     defineField({
       name: 'seo',
       title: 'SEO',
-      type: 'object',
+      type: 'object' as const,
       fields: [
         defineField({ name: 'metaTitle', title: 'Meta title', type: 'string' }),
         defineField({ name: 'metaDescription', title: 'Meta description', type: 'text', rows: 3 }),
@@ -29,10 +43,10 @@ export const aboutPage = defineType({
     defineField({
       name: 'education',
       title: 'Education',
-      type: 'array',
+      type: 'array' as const,
       of: [
         defineArrayMember({
-          type: 'object',
+          type: 'object' as const,
           fields: [
             defineField({
               name: 'title',
@@ -67,10 +81,10 @@ export const aboutPage = defineType({
     defineField({
       name: 'experience',
       title: 'Experience',
-      type: 'array',
+      type: 'array' as const,
       of: [
         defineArrayMember({
-          type: 'object',
+          type: 'object' as const,
           fields: [
             defineField({
               name: 'title',

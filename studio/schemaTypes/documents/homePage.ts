@@ -1,10 +1,24 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { supportedLanguages, baseLanguage } from '../localization'
 
 export const homePage = defineType({
   name: 'homePage',
   title: 'Home page',
   type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      title: 'Language',
+      type: 'string',
+      initialValue: baseLanguage,
+      options: {
+        list: supportedLanguages.map((language) => ({
+          title: language.title,
+          value: language.id,
+        })),
+      },
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'title',
       title: 'Title',

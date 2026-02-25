@@ -3,9 +3,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import RichText from '@/components/RichText.astro'
 import Container from '@/components/layout/Container.astro'
 import { sanity } from '@/lib/sanity'
+import { languageQueryParams } from '@/lib/i18n'
 import { contactPageQuery } from '@/lib/sanityQueries'
 
-const page = sanity ? await sanity.fetch<any>(contactPageQuery) : null
+const page = sanity ? await sanity.fetch<any>(contactPageQuery, languageQueryParams) : null
 ---
 
 <BaseLayout title={page?.seo?.metaTitle || page?.title}>
