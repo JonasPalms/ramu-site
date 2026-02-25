@@ -16,6 +16,13 @@ export async function getStaticPaths() {
 const { slug } = Astro.params
 const project = sanity ? await sanity.fetch<any>(projectBySlugQuery, { slug }) : null
 
+const projectTypeLabel: Record<string, string> = {
+  documentary: 'Documentary',
+  shortFilm: 'Short film',
+  article: 'Article',
+  socialMedia: 'Social media',
+}
+
 const heroUrl =
   project?.hero?.image &&
   urlForImage(project.hero.image)?.width(2000).fit('max').auto('format').url()
@@ -29,6 +36,17 @@ const heroUrl =
       </div>
       <h1 class="text-4xl tracking-tight">{project.title}</h1>
       {project.year ? <p class="text-muted">{project.year}</p> : null}
+      {
+        Array.isArray(project.projectTypes) && project.projectTypes.length ? (
+          <div class="flex flex-wrap gap-2 pt-1">
+            {project.projectTypes.map((type: string) => (
+              <span class="inline-flex items-center rounded-[var(--site-radius-badge)] border border-border bg-surface px-3 py-1 text-xs text-muted">
+                {projectTypeLabel[type] || type}
+              </span>
+            ))}
+          </div>
+        ) : null
+      }
     </header>
     {
       heroUrl ? (

@@ -24,6 +24,21 @@ export const project = defineType({
       type: 'number',
     }),
     defineField({
+      name: 'projectTypes',
+      title: 'Project types',
+      type: 'array' as const,
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Documentary', value: 'documentary' },
+          { title: 'Short film', value: 'shortFilm' },
+          { title: 'Article', value: 'article' },
+          { title: 'Social media', value: 'socialMedia' },
+        ],
+      },
+      validation: (Rule) => Rule.unique(),
+    }),
+    defineField({
       name: 'hero',
       title: 'Hero image',
       type: 'figure',

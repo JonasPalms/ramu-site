@@ -71,12 +71,14 @@ export const projectsIndexQuery = defineQuery(`*[_type == "project"]|order(year 
   title,
   "slug": slug.current,
   year,
+  projectTypes,
   hero
 }`)
 export const projectBySlugQuery = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
   title,
   "slug": slug.current,
   year,
+  projectTypes,
   hero,
   video,
   body
