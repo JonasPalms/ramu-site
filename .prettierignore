@@ -6,4 +6,4 @@ frontend/.astro
 studio/node_modules
 studio/.sanity
 studio/schema.json
-
+pnpm-lock.yaml
