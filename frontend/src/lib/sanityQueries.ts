@@ -1,7 +1,16 @@
 import { defineQuery } from 'groq'
 
 export const homePageQuery = defineQuery(`coalesce(
-  *[_type == "homePage" && coalesce(language, $baseLanguage) == $language][0]{
+  *[_type == "homePage" && language == $language][0]{
+    title,
+    subtitle,
+    featuredProjects[]->{
+      title,
+      "slug": slug.current,
+      hero
+    }
+  },
+  *[_type == "homePage" && coalesce(language, $baseLanguage) == $baseLanguage][0]{
     title,
     subtitle,
     featuredProjects[]->{
@@ -17,7 +26,15 @@ export const homePageQuery = defineQuery(`coalesce(
 )`)
 
 export const aboutPageQuery = defineQuery(`coalesce(
-  *[_type == "aboutPage" && coalesce(language, $baseLanguage) == $language][0]{
+  *[_type == "aboutPage" && language == $language][0]{
+    title,
+    seo{metaTitle, metaDescription},
+    content,
+    education[]{_key, title, subtitle, period},
+    experience[]{_key, title, subtitle, period},
+    portrait
+  },
+  *[_type == "aboutPage" && coalesce(language, $baseLanguage) == $baseLanguage][0]{
     title,
     seo{metaTitle, metaDescription},
     content,
@@ -36,7 +53,12 @@ export const aboutPageQuery = defineQuery(`coalesce(
 )`)
 
 export const projectsPageQuery = defineQuery(`coalesce(
-  *[_type == "projectsPage" && coalesce(language, $baseLanguage) == $language][0]{
+  *[_type == "projectsPage" && language == $language][0]{
+    title,
+    seo{metaTitle, metaDescription},
+    "intro": intro
+  },
+  *[_type == "projectsPage" && coalesce(language, $baseLanguage) == $baseLanguage][0]{
     title,
     seo{metaTitle, metaDescription},
     "intro": intro
@@ -52,7 +74,12 @@ export const projectsPageQuery = defineQuery(`coalesce(
 )`)
 
 export const contactPageQuery = defineQuery(`coalesce(
-  *[_type == "contactPage" && coalesce(language, $baseLanguage) == $language][0]{
+  *[_type == "contactPage" && language == $language][0]{
+    title,
+    seo{metaTitle, metaDescription},
+    content
+  },
+  *[_type == "contactPage" && coalesce(language, $baseLanguage) == $baseLanguage][0]{
     title,
     seo{metaTitle, metaDescription},
     content

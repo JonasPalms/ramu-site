@@ -3,13 +3,21 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import RichText from '@/components/RichText.astro'
 import Container from '@/components/layout/Container.astro'
 import { sanity } from '@/lib/sanity'
-import { languageQueryParams } from '@/lib/i18n'
+import { baseLanguage, defaultLocale, languageQueryParams, normalizeLocale } from '@/lib/i18n'
 import { contactPageQuery } from '@/lib/sanityQueries'
 
-const page = sanity ? await sanity.fetch<any>(contactPageQuery, languageQueryParams) : null
+const { locale: localeProp } = Astro.props as { locale?: string }
+const locale = normalizeLocale(localeProp ?? defaultLocale)
+const localeParams = languageQueryParams(locale)
+const fallbackParams = languageQueryParams(baseLanguage)
+
+const page = sanity
+  ? ((await sanity.fetch<any>(contactPageQuery, localeParams)) ??
+    (locale === baseLanguage ? null : await sanity.fetch<any>(contactPageQuery, fallbackParams)))
+  : null
 ---
 
-<BaseLayout title={page?.seo?.metaTitle || page?.title}>
+<BaseLayout title={page?.seo?.metaTitle || page?.title} locale={locale}>
   <Container size="wide" class="space-y-8">
     {
       page?.title || page?.seo?.metaDescription ? (

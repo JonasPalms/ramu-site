@@ -3,24 +3,43 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import Container from '@/components/layout/Container.astro'
 import FrontpageHero from '@/components/hero/FrontpageHero.astro'
 import { sanity } from '../lib/sanity'
-import { languageQueryParams } from '@/lib/i18n'
+import { baseLanguage, defaultLocale, languageQueryParams, normalizeLocale } from '@/lib/i18n'
 import { homePageQuery, projectsIndexQuery, siteSettingsQuery } from '../lib/sanityQueries'
 
+const { locale: localeProp } = Astro.props as { locale?: string }
+const locale = normalizeLocale(localeProp ?? defaultLocale)
+const localeParams = languageQueryParams(locale)
+const fallbackParams = languageQueryParams(baseLanguage)
+
 const settings = sanity ? await sanity.fetch(siteSettingsQuery) : null
-const home = sanity ? await sanity.fetch<any>(homePageQuery, languageQueryParams) : null
-const allProjects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery, languageQueryParams) : []
+const home = sanity
+  ? ((await sanity.fetch<any>(homePageQuery, localeParams)) ??
+    (locale === baseLanguage ? null : await sanity.fetch<any>(homePageQuery, fallbackParams)))
+  : null
+
+const localizedProjects = sanity ? await sanity.fetch<any[]>(projectsIndexQuery, localeParams) : []
+const fallbackProjects =
+  sanity && locale !== baseLanguage
+    ? await sanity.fetch<any[]>(projectsIndexQuery, fallbackParams)
+    : []
+const allProjects =
+  Array.isArray(localizedProjects) && localizedProjects.length
+    ? localizedProjects
+    : fallbackProjects
+
 const projects =
   Array.isArray(home?.featuredProjects) && home.featuredProjects.length
     ? home.featuredProjects
     : allProjects
 ---
 
-<BaseLayout title={home?.title || settings?.title || 'Home'}>
+<BaseLayout title={home?.title || settings?.title || 'Home'} locale={locale}>
   <Container size="wide">
     <FrontpageHero
       title={home?.title || settings?.title || 'Ramu'}
       subtitle={home?.subtitle || 'Freelance director and video journalist'}
       projects={projects}
+      locale={locale}
     />
   </Container>
 </BaseLayout>

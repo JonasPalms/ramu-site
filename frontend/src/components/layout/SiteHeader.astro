@@ -1,5 +1,6 @@
 ---
 import Container from '@/components/layout/Container.astro'
+import { localePath, normalizeLocale } from '@/lib/i18n'
 
 type NavItem = {
   label?: string
@@ -7,23 +8,27 @@ type NavItem = {
   externalUrl?: string
 }
 
-const { navigation = [] } = Astro.props as {
+const { navigation = [], locale: localeProp } = Astro.props as {
   navigation?: NavItem[]
+  locale?: string
 }
+const locale = normalizeLocale(localeProp)
 ---
 
 <header
   class="site-nav fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm"
 >
   <Container as="div" size="full" class="flex h-(--site-nav-height) items-center justify-between">
-    <a href="/" class="font-[Fraunces] text-md font-semibold lowercase tracking-wide"
-      >rasmus sandager</a
+    <a
+      href={localePath('/', locale)}
+      class="font-[Fraunces] text-md font-semibold lowercase tracking-wide">rasmus sandager</a
     >
     <nav aria-label="Main">
       <ul class="flex items-center gap-5 text-sm">
         {
           navigation.map((item) => {
-            const href = item?.externalUrl || (item?.pageSlug ? `/${item.pageSlug}` : null)
+            const href =
+              item?.externalUrl || (item?.pageSlug ? localePath(`/${item.pageSlug}`, locale) : null)
             if (!href || !item?.label) return null
 
             return (

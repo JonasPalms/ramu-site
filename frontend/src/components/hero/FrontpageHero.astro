@@ -1,5 +1,6 @@
 ---
 import { urlForImage } from '@/lib/sanityImage'
+import { localePath, normalizeLocale } from '@/lib/i18n'
 
 type HeroProject = {
   title?: string
@@ -14,11 +15,15 @@ const {
   title = 'Ramu',
   subtitle = 'Freelance director and video journalist',
   projects = [],
+  locale: localeProp,
 } = Astro.props as {
   title?: string
   subtitle?: string
   projects?: HeroProject[]
+  locale?: string
 }
+
+const locale = normalizeLocale(localeProp)
 
 const imageProjects = projects
   .map((project) => ({
@@ -48,7 +53,11 @@ const gridItems = Array.from({ length: 9 }, (_, index) => imageProjects[index] ?
       gridItems.map((item) =>
         item ? (
           <a
-            href={item.slug ? `/projects/${item.slug}` : '/projects'}
+            href={
+              item.slug
+                ? localePath(`/projects/${item.slug}`, locale)
+                : localePath('/projects', locale)
+            }
             class="group block overflow-hidden bg-surface"
           >
             <img

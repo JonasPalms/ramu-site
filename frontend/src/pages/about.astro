@@ -4,17 +4,26 @@ import RichText from '@/components/RichText.astro'
 import Container from '@/components/layout/Container.astro'
 import CvTimeline from '@/components/about/CvTimeline.astro'
 import { sanity } from '@/lib/sanity'
-import { languageQueryParams } from '@/lib/i18n'
+import { baseLanguage, defaultLocale, languageQueryParams, normalizeLocale } from '@/lib/i18n'
 import { urlForImage } from '@/lib/sanityImage'
 import { aboutPageQuery } from '@/lib/sanityQueries'
 
-const page = sanity ? await sanity.fetch<any>(aboutPageQuery, languageQueryParams) : null
+const { locale: localeProp } = Astro.props as { locale?: string }
+const locale = normalizeLocale(localeProp ?? defaultLocale)
+const localeParams = languageQueryParams(locale)
+const fallbackParams = languageQueryParams(baseLanguage)
+
+const page = sanity
+  ? ((await sanity.fetch<any>(aboutPageQuery, localeParams)) ??
+    (locale === baseLanguage ? null : await sanity.fetch<any>(aboutPageQuery, fallbackParams)))
+  : null
+
 const portraitUrl =
   page?.portrait?.image &&
   urlForImage(page.portrait.image)?.width(1000).height(1250).fit('crop').auto('format').url()
 ---
 
-<BaseLayout title={page?.seo?.metaTitle || page?.title || 'About'}>
+<BaseLayout title={page?.seo?.metaTitle || page?.title || 'About'} locale={locale}>
   <Container size="wide" class="space-y-8">
     <header class="space-y-3">
       <h1 class="text-4xl tracking-tight">{page?.title || 'About'}</h1>

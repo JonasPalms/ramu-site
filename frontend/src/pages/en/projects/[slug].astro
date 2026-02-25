@@ -1,0 +1,17 @@
+---
+import ProjectPage from '../../projects/[slug].astro'
+import { sanity } from '@/lib/sanity'
+import { allProjectSlugsQuery } from '@/lib/sanityQueries'
+import { languageQueryParams } from '@/lib/i18n'
+
+export async function getStaticPaths() {
+  if (!sanity) return []
+  const projects = await sanity.fetch<{ slug: string }[]>(
+    allProjectSlugsQuery,
+    languageQueryParams('en'),
+  )
+  return projects.map((p) => ({ params: { slug: p.slug } }))
+}
+---
+
+<ProjectPage locale="en" />
