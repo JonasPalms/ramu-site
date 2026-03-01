@@ -7,12 +7,22 @@ import { schemaTypes } from './schemaTypes'
 import { supportedLanguages } from './schemaTypes/localization'
 import { structure } from './structure'
 
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || import.meta.env.SANITY_STUDIO_PROJECT_ID
+const dataset =
+  process.env.SANITY_STUDIO_DATASET || import.meta.env.SANITY_STUDIO_DATASET || 'development'
+
+if (!projectId) {
+  throw new Error(
+    'Missing SANITY_STUDIO_PROJECT_ID. Create studio/.env (see studio/.env.example) or set it in your shell.',
+  )
+}
+
 export default defineConfig({
   name: 'default',
   title: 'Ramu Studio',
 
-  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID!,
-  dataset: import.meta.env.SANITY_STUDIO_DATASET || 'development',
+  projectId,
+  dataset,
 
   plugins: [
     structureTool({ structure }),

@@ -4,7 +4,7 @@ This folder contains the Sanity Studio (schemas/models + editor UI).
 
 ## Setup
 
-1. Copy env vars:
+1. Add env vars in this workspace:
 
 - Create `studio/.env` (or use your shell env) with:
   - `SANITY_STUDIO_PROJECT_ID=aos0274a`
@@ -13,8 +13,9 @@ This folder contains the Sanity Studio (schemas/models + editor UI).
 2. Install and run:
 
 ```bash
-npm install
-npm run dev
+corepack enable
+pnpm install
+pnpm studio
 ```
 
 ## Deploy

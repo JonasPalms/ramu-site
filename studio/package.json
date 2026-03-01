@@ -9,7 +9,7 @@
     "deploy-graphql": "sanity graphql deploy",
     "schema:extract": "sanity schema extract",
     "typegen": "sanity typegen generate --config-path sanity-typegen.json",
-    "typegen:all": "npm run schema:extract && npm run typegen"
+    "typegen:all": "pnpm run schema:extract && pnpm run typegen"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^5.0.2",

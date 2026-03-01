@@ -12,26 +12,34 @@ Global config (Prettier, README) lives in the repo root.
 1. Install dependencies (root installs all workspaces):
 
 ```sh
-npm install
+corepack enable
+pnpm install
 ```
 
-2. Add env vars. For the frontend, create `frontend/.env` (or root `.env` if you prefer) with `SANITY_PROJECT_ID`, `SANITY_DATASET`, `SANITY_API_VERSION`. For Studio, see `studio/README.md` and `studio/.env`.
+2. Add env vars for each workspace:
+
+```sh
+cp frontend/.env.example frontend/.env
+cp studio/.env.example studio/.env
+```
+
+Set values in each file based on your environment.
 
 3. Run the Astro dev server:
 
 ```sh
-npm run dev
+pnpm dev
 ```
 
 4. Run Sanity Studio (optional):
 
 ```sh
-npm run studio
+pnpm studio
 ```
 
 ## Deploy (Vercel)
 
-- Build from root: set Vercel build command to `npm run build` (runs `build` in `frontend`).
+- Build from root: set Vercel build command to `pnpm build` (runs `build` in `frontend`).
 - Set `SANITY_*` env vars in Vercel.
 - Add a Sanity webhook (Deploy Hook) so the site rebuilds on publish.
 
