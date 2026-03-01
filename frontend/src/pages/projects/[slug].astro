@@ -10,24 +10,27 @@ import {
   localePath,
   normalizeLocale,
 } from '@/lib/i18n'
-import { sanity } from '@/lib/sanity'
+import { getSanity } from '@/lib/sanity'
 import { allProjectSlugsQuery, projectBySlugQuery } from '@/lib/sanityQueries'
 import { urlForImage } from '@/lib/sanityImage'
 
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
+
 export async function getStaticPaths() {
-  if (!sanity) return []
+  const sanityClient = getSanity()
+  if (!sanityClient) return []
 
   const localeParams = languageQueryParams(defaultLocale)
   const fallbackParams = languageQueryParams(baseLanguage)
 
-  const localizedProjects = await sanity.fetch<{ slug: string }[]>(
+  const localizedProjects = await sanityClient.fetch<{ slug: string }[]>(
     allProjectSlugsQuery,
     localeParams,
   )
   const fallbackProjects =
     defaultLocale === baseLanguage
       ? []
-      : ((await sanity.fetch<{ slug: string }[]>(allProjectSlugsQuery, fallbackParams)) ?? [])
+      : ((await sanityClient.fetch<{ slug: string }[]>(allProjectSlugsQuery, fallbackParams)) ?? [])
   const projects =
     Array.isArray(localizedProjects) && localizedProjects.length
       ? localizedProjects
@@ -38,6 +41,7 @@ export async function getStaticPaths() {
 
 const { locale: localeProp } = Astro.props as { locale?: string }
 const locale = normalizeLocale(localeProp ?? defaultLocale)
+const sanity = getSanity()
 const localeParams = languageQueryParams(locale)
 const fallbackParams = languageQueryParams(baseLanguage)
 
@@ -48,6 +52,10 @@ const project = sanity
       ? null
       : await sanity.fetch<any>(projectBySlugQuery, { ...fallbackParams, slug })))
   : null
+
+if (!project) {
+  Astro.response.status = 404
+}
 
 const projectTypeLabel: Record<string, string> = {
   documentary: 'Documentary',

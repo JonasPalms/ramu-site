@@ -10,12 +10,15 @@ import {
   localePath,
   normalizeLocale,
 } from '@/lib/i18n'
-import { sanity } from '@/lib/sanity'
+import { getSanity } from '@/lib/sanity'
 import { projectsIndexQuery, projectsPageQuery } from '@/lib/sanityQueries'
 import { urlForImage } from '@/lib/sanityImage'
 
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
+
 const { locale: localeProp } = Astro.props as { locale?: string }
 const locale = normalizeLocale(localeProp ?? defaultLocale)
+const sanity = getSanity()
 const localeParams = languageQueryParams(locale)
 const fallbackParams = languageQueryParams(baseLanguage)
 

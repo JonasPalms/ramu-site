@@ -17,12 +17,23 @@ export function getSanityConfig(): SanityConfig | null {
   return { projectId, dataset, apiVersion, useCdn }
 }
 
-const sanityConfig = getSanityConfig()
+const isPreviewDeploy =
+  (import.meta.env.SANITY_PREVIEW_DEPLOY ?? import.meta.env.SANITY_PREVIEW ?? 'false') === 'true'
 
-export const sanity =
-  sanityConfig &&
-  createClient({
+export function getSanity() {
+  const sanityConfig = getSanityConfig()
+  if (!sanityConfig) return null
+
+  const token = import.meta.env.SANITY_API_READ_TOKEN
+  const previewEnabled = Boolean(token) && isPreviewDeploy
+
+  return createClient({
     ...sanityConfig,
-    perspective: 'published',
-    stega: false,
+    useCdn: previewEnabled ? false : sanityConfig.useCdn,
+    perspective: previewEnabled ? 'previewDrafts' : 'published',
+    stega: previewEnabled,
+    token: previewEnabled ? token : undefined,
   })
+}
+
+export const sanity = getSanity()

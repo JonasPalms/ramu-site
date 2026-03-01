@@ -1,5 +1,6 @@
 ---
 import ProjectsPage from '../../projects/index.astro'
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
 ---
 
 <ProjectsPage locale="en" />

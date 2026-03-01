@@ -2,12 +2,15 @@
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import Container from '@/components/layout/Container.astro'
 import FrontpageHero from '@/components/hero/FrontpageHero.astro'
-import { sanity } from '../lib/sanity'
+import { getSanity } from '@/lib/sanity'
 import { baseLanguage, defaultLocale, languageQueryParams, normalizeLocale } from '@/lib/i18n'
 import { homePageQuery, projectsIndexQuery, siteSettingsQuery } from '../lib/sanityQueries'
 
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
+
 const { locale: localeProp } = Astro.props as { locale?: string }
 const locale = normalizeLocale(localeProp ?? defaultLocale)
+const sanity = getSanity()
 const localeParams = languageQueryParams(locale)
 const fallbackParams = languageQueryParams(baseLanguage)
 

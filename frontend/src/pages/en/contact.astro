@@ -1,5 +1,6 @@
 ---
 import ContactPage from '../contact.astro'
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
 ---
 
 <ContactPage locale="en" />

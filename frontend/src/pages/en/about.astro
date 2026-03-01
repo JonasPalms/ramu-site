@@ -1,5 +1,6 @@
 ---
 import AboutPage from '../about.astro'
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
 ---
 
 <AboutPage locale="en" />

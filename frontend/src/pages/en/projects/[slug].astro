@@ -2,14 +2,16 @@
 import ProjectPage from '../../projects/[slug].astro'
 import { sanity } from '@/lib/sanity'
 import { allProjectSlugsQuery } from '@/lib/sanityQueries'
-import { languageQueryParams } from '@/lib/i18n'
+import { baseLanguage } from '@/lib/i18n'
+
+export const prerender = process.env.SANITY_PREVIEW_DEPLOY !== 'true'
 
 export async function getStaticPaths() {
   if (!sanity) return []
-  const projects = await sanity.fetch<{ slug: string }[]>(
-    allProjectSlugsQuery,
-    languageQueryParams('en'),
-  )
+  const projects = await sanity.fetch<{ slug: string }[]>(allProjectSlugsQuery, {
+    language: 'en',
+    baseLanguage,
+  })
   return projects.map((p) => ({ params: { slug: p.slug } }))
 }
 ---

@@ -9,7 +9,9 @@
     "deploy-graphql": "sanity graphql deploy",
     "schema:extract": "sanity schema extract",
     "typegen": "sanity typegen generate --config-path sanity-typegen.json",
-    "typegen:all": "pnpm run schema:extract && pnpm run typegen"
+    "typegen:all": "pnpm run schema:extract && pnpm run typegen",
+    "dataset:copy:dev-to-prod": "SANITY_ACTIVE_ENV=development pnpm exec sanity dataset export development ./dev-export.tar.gz --overwrite && SANITY_ACTIVE_ENV=production pnpm exec sanity dataset import ./dev-export.tar.gz production --replace",
+    "dataset:copy:prod-to-dev": "SANITY_ACTIVE_ENV=production pnpm exec sanity dataset export production ./prod-export.tar.gz --overwrite && SANITY_ACTIVE_ENV=development pnpm exec sanity dataset import ./prod-export.tar.gz development --replace"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^5.0.2",
